@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulado Inglês e Química</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f7fd;--card:#ffffff;--ink:#14243d;--muted:#5a6b85;--line:#d6e2f3;--blue:#1f6fd1;--navy:#0c3d7a;--sky:#e8f1fc;
+--ok:#1e8e4e;--okbg:#e6f6ec;--bad:#c0392b;--badbg:#fdecea;--chem:#0f8a7e;--chembg:#e2f5f2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1622;--card:#16212f;--ink:#e6eef9;--muted:#9fb0c8;--line:#2a3a50;--blue:#5aa0ff;--navy:#9cc4ff;--sky:#1b2b42;
+--ok:#4cc985;--okbg:#14301f;--bad:#ff7b6b;--badbg:#3a1a17;--chem:#3fd0bf;--chembg:#123230}}
+:root[data-theme="dark"]{--bg:#0e1622;--card:#16212f;--ink:#e6eef9;--muted:#9fb0c8;--line:#2a3a50;--blue:#5aa0ff;--navy:#9cc4ff;--sky:#1b2b42;
+--ok:#4cc985;--okbg:#14301f;--bad:#ff7b6b;--badbg:#3a1a17;--chem:#3fd0bf;--chembg:#123230}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:26px;margin:4px 0 2px;color:var(--navy);font-weight:800}
+.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
+.pick{text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:16px;cursor:pointer;font:inherit}
+.pick:hover{border-color:var(--blue)}
+.pick b{display:block;font-size:18px;color:var(--navy)}
+.pick span{color:var(--muted);font-size:14px}
+label{font-weight:600;font-size:14px;color:var(--muted)}
+input[type=text]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--bg);color:var(--ink);margin-top:6px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);gap:8px}
+.bar{height:6px;background:var(--sky);border-radius:4px;margin:8px 0 16px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:20px;background:var(--sky);color:var(--blue)}
+.tag.chem{background:var(--chembg);color:var(--chem)}
+.q{font-size:17px;font-weight:600;margin:10px 0 6px}
+.text{background:var(--sky);border-radius:10px;padding:12px 14px;font-size:15px;margin:8px 0;font-style:italic}
+.opt{display:flex;gap:10px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt .l{font-weight:800;color:var(--blue);min-width:20px}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default}
+.fb{border-radius:12px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb p{margin:4px 0 0;color:var(--ink)}
+.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{flex:1;min-width:120px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
+.big{font-size:44px;font-weight:800;color:var(--navy);margin:6px 0}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--sky);border-radius:12px;padding:12px}
+.stat small{color:var(--muted);display:block}
+.stat b{font-size:22px}
+.wrong{border-top:1px solid var(--line);padding:12px 0}
+.wrong:first-child{border-top:0}
+.wrong .q{font-size:15px;margin:4px 0}
+.hint{font-size:14px;color:var(--muted)}
+.copied{font-size:14px;color:var(--ok);min-height:20px;margin-top:6px}
+.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+.hidden{display:none}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin-top:4px}
+.rank{margin-top:18px}
+.rank h2{font-size:20px;margin:0 0 4px;color:var(--navy)}
+.tabs{display:flex;gap:6px;margin:10px 0}
+.tabs button{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.rrow{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line)}
+.rrow:first-child{border-top:0}
+.pos{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--sky);color:var(--navy);flex:none}
+.pos.g1{background:#f6c445;color:#5a3d00}.pos.g2{background:#cfd6df;color:#2b3440}.pos.g3{background:#e0a46b;color:#4a2a0b}
+.rname{flex:1;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rsc{font-weight:800;color:var(--navy)}
+.rsc small{color:var(--muted);font-weight:600}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:13px;word-break:break-all;background:var(--sky);border-radius:10px;padding:10px;margin:8px 0}
+textarea{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:var(--bg);color:var(--ink)}
+.note{background:var(--sky);border-radius:12px;padding:12px 14px;font-size:15px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>9º ano · Prova Trimestral</span><button class="theme" id="themeBtn">Tema</button></div>
+  <h1>Simulado: Inglês e Química</h1>
+  <p class="sub">Responda, veja a explicação na hora e confira sua nota no final.</p>
+
+  <section id="start" class="card">
+    <label for="name">Seu nome (aparece no ranking)</label>
+    <input type="text" id="name" maxlength="24" placeholder="Ex.: Murilo">
+    <div class="err" id="nameErr"></div>
+    <div class="grid">
+      <button class="pick" data-mode="eng"><b>Inglês</b><span>Reading, contrast words, prefixes, comparatives e possessives</span></button>
+      <button class="pick" data-mode="chem"><b>Química</b><span>Tabela periódica, distribuição eletrônica, ligações iônica e covalente</span></button>
+      <button class="pick" data-mode="mix"><b>Misturado</b><span>As duas matérias, em ordem aleatória</span></button>
+    </div>
+    <p class="hint">As questões seguem os roteiros de estudo da professora e do professor. As alternativas são embaralhadas a cada tentativa.</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="top"><span id="prog"></span><span id="score"></span></div>
+    <div class="bar"><i id="barFill"></i></div>
+    <span class="tag" id="tag"></span>
+    <div id="passage"></div>
+    <div class="q" id="question"></div>
+    <div id="opts"></div>
+    <div id="fb"></div>
+    <div class="row">
+      <button class="btn" id="quitBtn">Sair</button>
+      <button class="btn main hidden" id="nextBtn">Próxima</button>
+    </div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="hint" id="resName"></div>
+    <div class="big" id="resScore"></div>
+    <div id="resMsg"></div>
+    <div class="stats" id="resStats"></div>
+    <div class="row">
+      <button class="btn main" id="retryWrong">Refazer as que errei</button>
+      <button class="btn" id="restart">Começar de novo</button>
+    </div>
+    <div id="rankBox" class="note"></div>
+    <div class="copied" id="copied"></div>
+    <h3 style="margin:18px 0 6px;color:var(--navy)">Revise o que errou</h3>
+    <div id="wrongList"></div>
+  </section>
+
+  <section class="card rank" id="rankCard">
+    <h2>Ranking da turma</h2>
+    <div class="hint">Conta a melhor nota de cada pessoa em cada matéria (só simulados feitos até o fim). Atualiza sozinho.</div>
+    <div class="tabs">
+      <button data-k="total" class="on">Geral</button><button data-k="eng">Inglês</button><button data-k="chem">Química</button>
+    </div>
+    <div id="rankList"><p class="hint">Carregando ranking…</p></div>
+    <div class="row"><button class="btn" id="copyRank">Copiar ranking</button></div>
+    <div class="copied" id="rankCopied"></div>
+  </section>
+
+
+</div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbyck0co983cJQApEy4_ZZ7mdfEFPWO9ysO5V-FxGeoc_Ec6o61E7UFalYnjFPYKMfzGKQ/exec";
+function apiCall(params, ok, fail) {
+  fetch(API + "?" + new URLSearchParams(params), { redirect: "follow" })
+    .then(r => r.json())
+    .then(d => { if (d.ok) { ok && ok(d.data); } else { fail && fail(new Error(d.error)); } })
+    .catch(e => { fail && fail(e); });
+}
+function makeRunner(ok, fail) {
+  return {
+    withSuccessHandler: h => makeRunner(h, fail),
+    withFailureHandler: h => makeRunner(ok, h),
+    getRanking: () => apiCall({ action: "rank" }, ok, fail),
+    submitScore: (n, e, c) => apiCall({ action: "submit", name: n, eng: e == null ? "" : e, chem: c == null ? "" : c }, ok, fail)
+  };
+}
+window.google = { script: { get run() { return makeRunner(null, null); } } };
+</script>
+<script>
+const PASSAGE = "In the 1980s, teenagers listened to music on cassette tapes and Walkmans. In the 2000s, MP3 players became very popular. Today, most young people stream songs on their phones. The way we listen to music has changed a lot in the last forty years.";
+const Q = [
+ // ---------- INGLÊS ----------
+ {s:"eng",t:"Reading",p:PASSAGE,q:"What is the MAIN IDEA of the text?",o:["The way people listen to music has changed over time.","Music.","MP3 players were popular in the 2000s.","Teenagers don't like music today."],a:0,e:"A main idea é uma frase completa que resume o texto todo. “Music” é too general, e a frase sobre MP3 é too specific (só um detalhe)."},
+ {s:"eng",t:"Reading",p:PASSAGE,q:"“MP3 players were popular in the 2000s” is…",o:["too specific","the main idea","too general","the topic"],a:0,e:"É só um detalhe (supporting detail) do texto. Por isso, como main idea, seria too specific."},
+ {s:"eng",t:"Reading",p:PASSAGE,q:"True or false? “ALL teenagers in the 1980s had a Walkman.”",o:["False","True"],a:0,e:"O texto não diz isso. Desconfie de palavras absolutas como all, only, always e never."},
+ {s:"eng",t:"Contrast words",q:"_____ the rain, we played soccer.",o:["Despite","Although","Whereas","However"],a:0,e:"Depois de “the rain” vem só um nome, então usamos despite. Although pede uma frase completa: “Although it rained…”."},
+ {s:"eng",t:"Contrast words",q:"_____ it was very cold, she didn't wear a coat.",o:["Although","Despite","Unlike","Instead of"],a:0,e:"“It was very cold” é uma frase completa (sujeito + verbo), então usamos although."},
+ {s:"eng",t:"Contrast words",q:"I like tea, _____ my brother prefers coffee.",o:["whereas","despite","instead of","unlike"],a:0,e:"Whereas (enquanto) compara duas frases completas que são diferentes."},
+ {s:"eng",t:"Contrast words",q:"Which sentence is WRONG?",o:["Despite she was tired, she finished the test.","Despite being tired, she finished the test.","Although she was tired, she finished the test.","Despite the fact that she was tired, she finished the test."],a:0,e:"Despite não pode vir antes de frase completa. O certo é “Despite being tired” ou “Although she was tired”."},
+ {s:"eng",t:"Contrast words",q:"He walked to school _____ taking the bus.",o:["instead of","however","although","whereas"],a:0,e:"Instead of (em vez de) vem antes de nome ou verbo com -ing: “instead of taking”."},
+ {s:"eng",t:"Contrast words",q:"The phone is cheap. _____, the battery is very bad.",o:["However","Despite","Unlike","Instead of"],a:0,e:"However (porém) começa a frase e vem seguido de vírgula."},
+ {s:"eng",t:"Contrast words",q:"_____ my sister, I love math.",o:["Unlike","Although","Whereas","However"],a:0,e:"Unlike (diferente de) vem antes de um nome: “Unlike my sister…”."},
+ {s:"eng",t:"Prefixes",q:"What does the prefix MIS- mean in “misspell”?",o:["wrong","again","not","before"],a:0,e:"Mis- = errado. Misspell = soletrar errado. Re- = de novo; un-/im- = não."},
+ {s:"eng",t:"Prefixes",q:"“Rewrite” means…",o:["write again","not write","write wrong","write before"],a:0,e:"O prefixo re- significa “de novo”."},
+ {s:"eng",t:"Prefixes",q:"Which prefix makes the OPPOSITE of “possible”?",o:["im-","re-","mis-","un-"],a:0,e:"Im- significa “não”: impossible. Antes de palavras que começam com p, b ou m, o “não” costuma ser im-."},
+ {s:"eng",t:"Prefixes",q:"“I disagree with you” means…",o:["I don't agree with you","I agree with you again","I agree with you a lot","I agreed with you before"],a:0,e:"Dis- significa “não”: disagree = não concordar."},
+ {s:"eng",t:"Prefixes",q:"I _____ the question, so my answer was wrong. (understood it the wrong way)",o:["misunderstood","reunderstood","ununderstood","disunderstood"],a:0,e:"Mis- significa “errado”: misunderstand = entender errado."},
+ {s:"eng",t:"Prefixes",q:"Your answer is wrong. Please _____ the exercise. (do it again)",o:["redo","misdo","undo","disdo"],a:0,e:"Re- significa “de novo”: redo = fazer de novo. Undo é desfazer, não é fazer de novo."},
+ {s:"eng",t:"Comparatives",q:"This test is _____ than the last one.",o:["easier","more easy","easiest","the easiest"],a:0,e:"Easy termina em -y: o y vira i + er = easier. Comparativo usa than."},
+ {s:"eng",t:"Superlatives",q:"This is _____ movie I've ever seen.",o:["the best","the goodest","better","the most good"],a:0,e:"Good é irregular: good → better → the best."},
+ {s:"eng",t:"Superlatives",q:"He is _____ singer in Brazil.",o:["the most famous","the famousest","more famous","most famous than"],a:0,e:"Adjetivos com 2 sílabas ou mais: the most + adjetivo."},
+ {s:"eng",t:"Intensifiers",q:"It's _____ the best pizza in town.",o:["by far","much","a bit","slightly"],a:0,e:"By far (de longe) é usado com superlative. Much, a bit e slightly vão com comparative."},
+ {s:"eng",t:"Intensifiers",q:"My new phone is _____ bigger than my old one.",o:["much","by far","the most","very"],a:0,e:"Much e far intensificam comparatives: “much bigger than”."},
+ {s:"eng",t:"Comparatives",q:"There are _____ students in class today than yesterday.",o:["fewer","less","least","the fewest"],a:0,e:"Students é contável, então usamos fewer. Less é para incontáveis (less water)."},
+ {s:"eng",t:"Possessives",q:"“The house that belongs to my parents” = …",o:["my parents' house","my parent's house","my parents's house","the my parents house"],a:0,e:"Parents é plural terminado em -s, então leva só o apóstrofo: parents'."},
+ {s:"eng",t:"Possessives",q:"“The toys belonging to the children” = …",o:["the children's toys","the childrens' toys","the children toys","the childrens toys"],a:0,e:"Children é plural irregular (não termina em -s), então leva 's: children's."},
+ {s:"eng",t:"Possessives",q:"“The news of today” = …",o:["today's news","todays news","today news's","the today's news"],a:0,e:"Expressões de tempo também usam 's: today's news, tomorrow's game."},
+ {s:"eng",t:"Possessives",q:"“The room that belongs to my sister” (I have ONE sister) = …",o:["my sister's room","my sisters' room","my sister room","the my sister's room"],a:0,e:"Uma irmã só: singular + 's = sister's. Sisters' seria o quarto de várias irmãs."},
+ {s:"eng",t:"Possessives",q:"“The match we are playing next Saturday” = …",o:["next Saturday's match","next Saturdays' match","the match's next Saturday","next Saturday match's"],a:0,e:"Expressão de tempo + 's + coisa: next Saturday's match."},
+ // ---------- QUÍMICA ----------
+ {s:"chem",t:"Tabela periódica",q:"Elementos da mesma família têm propriedades químicas semelhantes porque possuem:",o:["o mesmo número de elétrons na camada de valência","o mesmo número de camadas","a mesma massa atômica","o mesmo número de nêutrons"],a:0,e:"A família indica os elétrons de valência. Mesmo número de camadas = mesmo PERÍODO."},
+ {s:"chem",t:"Distribuição eletrônica",q:"O cálcio (Z = 20) tem distribuição 2 – 8 – 8 – 2. Ele está no:",o:["4º período, família 2","2º período, família 4","4º período, família 12","2º período, família 2"],a:0,e:"4 camadas = 4º período. Último número 2 = família 2 (alcalino-terrosos)."},
+ {s:"chem",t:"Distribuição eletrônica",q:"O cloro (Z = 17) tem distribuição 2 – 8 – 7. Ele pertence à família dos:",o:["halogênios (17)","calcogênios (16)","gases nobres (18)","metais alcalinos (1)"],a:0,e:"7 elétrons de valência → 7 + 10 = família 17, os halogênios."},
+ {s:"chem",t:"Distribuição eletrônica",q:"Qual é a distribuição eletrônica do enxofre (Z = 16) por camadas?",o:["2 – 8 – 6","2 – 6 – 8","2 – 8 – 4 – 2","8 – 8"],a:0,e:"Enche 2, depois 8, e sobra 6 para a terceira camada. Confira: 2 + 8 + 6 = 16."},
+ {s:"chem",t:"Gases nobres",q:"Os gases nobres quase não reagem porque:",o:["já têm a camada de valência completa","são metais muito duros","têm muitos elétrons livres","perdem elétrons com facilidade"],a:0,e:"Eles já têm 8 elétrons na última camada (o hélio tem 2), então já são estáveis."},
+ {s:"chem",t:"Metais",q:"A propriedade de um metal ser transformado em FIOS é a:",o:["ductilidade","maleabilidade","eletronegatividade","condutividade"],a:0,e:"Dúctil = vira fio (fio de cobre). Maleável = vira lâmina (papel-alumínio)."},
+ {s:"chem",t:"Metais",q:"Os metais conduzem bem a eletricidade porque:",o:["têm elétrons livres que se movimentam","têm a camada de valência completa","formam moléculas","ganham elétrons com facilidade"],a:0,e:"Os metais têm o “mar de elétrons”: elétrons livres que se movimentam pela estrutura."},
+ {s:"chem",t:"Propriedades periódicas",q:"Entre Na, K, Mg e Cl, qual tem o MAIOR raio atômico?",o:["K","Na","Mg","Cl"],a:0,e:"O raio aumenta para baixo e para a esquerda. O potássio (K) está mais abaixo, na família 1."},
+ {s:"chem",t:"Propriedades periódicas",q:"O elemento mais eletronegativo da tabela é o:",o:["flúor","césio","oxigênio","hélio"],a:0,e:"A eletronegatividade aumenta para cima e para a direita. O flúor é o maior de todos (gases nobres ficam de fora)."},
+ {s:"chem",t:"Íons",q:"O magnésio (família 2) forma o íon:",o:["Mg²⁺, porque perde 2 elétrons","Mg²⁻, porque ganha 2 elétrons","Mg⁺, porque perde 1 elétron","Mg⁶⁻, porque ganha 6 elétrons"],a:0,e:"Metais perdem a valência inteira e viram cátions. Família 2 → perde 2 → Mg²⁺."},
+ {s:"chem",t:"Íons",q:"Quando o enxofre forma S²⁻, ele:",o:["ganhou 2 elétrons e virou ânion","perdeu 2 elétrons e virou cátion","ganhou 2 prótons","perdeu 2 prótons"],a:0,e:"Ganhou elétrons (negativos) → fica negativo → ânion."},
+ {s:"chem",t:"Fórmula iônica",q:"A fórmula do composto formado por Al³⁺ e O²⁻ é:",o:["Al₂O₃","Al₃O₂","AlO","AlO₃"],a:0,e:"Cruzando as cargas: Al₂O₃. Confere: 2 × (+3) + 3 × (−2) = 0."},
+ {s:"chem",t:"Fórmula iônica",q:"O magnésio (família 2) e o cloro (família 17) formam:",o:["MgCl₂","Mg₂Cl","MgCl","Mg₂Cl₇"],a:0,e:"Mg²⁺ e Cl⁻. Cruzando: MgCl₂. Confere: (+2) + 2 × (−1) = 0."},
+ {s:"chem",t:"Fórmula iônica",q:"Ca²⁺ e O²⁻ formam o composto:",o:["CaO","Ca₂O₂","Ca₂O","CaO₂"],a:0,e:"Cruzando dá Ca₂O₂, que simplifica para CaO."},
+ {s:"chem",t:"Ligação iônica",q:"Na ligação iônica acontece:",o:["transferência de elétrons de um metal para um ametal","compartilhamento de elétrons entre ametais","compartilhamento entre dois metais","perda de prótons"],a:0,e:"Metal doa elétrons (vira cátion) e ametal recebe (vira ânion). Compartilhamento é ligação covalente."},
+ {s:"chem",t:"Compostos iônicos",q:"O sal de cozinha sólido NÃO conduz eletricidade, mas dissolvido em água conduz. Isso ocorre porque, na água:",o:["os íons ficam livres para se mover","aparecem elétrons livres","formam-se ligações metálicas","surgem moléculas de NaCl"],a:0,e:"No sólido os íons ficam presos no retículo. Na água ficam livres, e são eles que conduzem a corrente."},
+ {s:"chem",t:"Compostos iônicos",q:"Os compostos iônicos têm ponto de fusão alto porque:",o:["a atração entre íons de cargas opostas é muito forte","são formados por moléculas pequenas","têm elétrons livres","são gases"],a:0,e:"No retículo cristalino, cátions e ânions se atraem com força, então é preciso muita energia para derreter."},
+ {s:"chem",t:"Compostos iônicos",q:"Os compostos iônicos são duros, mas quebradiços, porque um impacto:",o:["deixa íons de mesma carga frente a frente, e eles se repelem","libera elétrons livres","transforma íons em moléculas","faz os íons perderem prótons"],a:0,e:"O impacto desloca as camadas do cristal; cargas iguais ficam lado a lado e se repelem, e o cristal racha."},
+ {s:"chem",t:"Ligação covalente",q:"Qual destas substâncias é formada por ligação COVALENTE?",o:["H₂O","NaCl","KBr","CaO"],a:0,e:"H e O são ametais e compartilham elétrons. Os outros juntam metal + ametal (iônicos)."},
+ {s:"chem",t:"Ligação covalente",q:"Na molécula de N₂, os átomos estão unidos por uma ligação:",o:["tripla","simples","dupla","iônica"],a:0,e:"Cada N tem 5 elétrons de valência e precisa de 3: N≡N."},
+ {s:"chem",t:"Fórmula de Lewis",q:"Na água (H–O–H), quantos pares de elétrons NÃO ligantes tem o oxigênio?",o:["2","1","3","4"],a:0,e:"O oxigênio tem 6 elétrons de valência e faz 2 ligações: 6 − 2 = 4 elétrons = 2 pares."},
+ {s:"chem",t:"Fórmula estrutural",q:"Qual é a fórmula estrutural correta do etano (C₂H₆)?",o:["CH₃–CH₃","CH₂–CH₂","CH₃=CH₃","CH₄–CH₂"],a:0,e:"Cada carbono precisa de 4 ligações: 3 H + 1 traço = 4. E o total dá 2 C e 6 H."},
+ {s:"chem",t:"Reatividade",q:"Qual destes elementos é um metal alcalino muito reativo?",o:["Na","Fe","Ne","Cl"],a:0,e:"O sódio é da família 1: perde o único elétron de valência com facilidade."},
+ {s:"chem",t:"Classificação",q:"Qual destes é um elemento de TRANSIÇÃO?",o:["Fe","Na","S","Ar"],a:0,e:"Transição = famílias 3 a 12, o meio da tabela. O ferro é da família 8."}
+];
+
+const $ = id => document.getElementById(id);
+let list = [], i = 0, right = 0, answers = [], mode = "mix", player = "", isRetry = false;
+
+function shuffle(a){ for(let k=a.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [a[k],a[j]]=[a[j],a[k]]; } return a; }
+function prep(q){ const idx = shuffle(q.o.map((_,n)=>n)); return {...q, o: idx.map(n=>q.o[n]), a: idx.indexOf(q.a)}; }
+
+function startWith(qs, retry = false){
+  isRetry = retry;
+  // keep reading questions together, in order, at the start of their block
+  const reading = qs.filter(q=>q.p), rest = shuffle(qs.filter(q=>!q.p));
+  list = [...reading, ...rest].map(prep);
+  i = 0; right = 0; answers = [];
+  show("quiz"); render();
+}
+function show(id){ ["start","quiz","result"].forEach(s=>$(s).classList.toggle("hidden", s!==id)); $("rankCard").classList.toggle("hidden", id==="quiz"); window.scrollTo(0,0); }
+
+function render(){
+  const q = list[i];
+  $("prog").textContent = `Questão ${i+1} de ${list.length}`;
+  $("score").textContent = `Acertos: ${right}`;
+  $("barFill").style.width = (i/list.length*100)+"%";
+  $("tag").textContent = (q.s==="eng"?"Inglês · ":"Química · ")+q.t;
+  $("tag").className = "tag"+(q.s==="chem"?" chem":"");
+  $("passage").innerHTML = q.p ? `<div class="text"></div>` : "";
+  if(q.p) $("passage").firstChild.textContent = q.p;
+  $("question").textContent = q.q;
+  $("fb").innerHTML = ""; $("nextBtn").classList.add("hidden");
+  const box = $("opts"); box.innerHTML = "";
+  q.o.forEach((txt,n)=>{
+    const b = document.createElement("button"); b.className = "opt";
+    b.innerHTML = `<span class="l">${"ABCDE"[n]})</span><span></span>`; b.lastChild.textContent = txt;
+    b.onclick = ()=>choose(n); box.appendChild(b);
+  });
+}
+function choose(n){
+  const q = list[i], ok = n===q.a;
+  if(ok) right++;
+  answers.push({q, chosen:n, ok});
+  [...$("opts").children].forEach((b,k)=>{ b.disabled=true; if(k===q.a) b.classList.add("ok"); else if(k===n) b.classList.add("bad"); });
+  const fb = document.createElement("div"); fb.className = "fb "+(ok?"ok":"bad");
+  fb.innerHTML = `<b>${ok?"Acertou!":"Resposta certa: "+"ABCDE"[q.a]+")"}</b><p></p>`; fb.lastChild.textContent = q.e;
+  $("fb").appendChild(fb);
+  $("score").textContent = `Acertos: ${right}`;
+  $("nextBtn").textContent = i===list.length-1 ? "Ver resultado" : "Próxima";
+  $("nextBtn").classList.remove("hidden"); $("nextBtn").focus();
+}
+$("nextBtn").onclick = ()=>{ if(i<list.length-1){ i++; render(); } else finish(); };
+$("quitBtn").onclick = ()=> answers.length ? finish() : show("start");
+
+function finish(){
+  const total = answers.length, pct = total ? Math.round(right/total*100) : 0;
+  $("resName").textContent = player ? `Resultado de ${player}` : "Seu resultado";
+  $("resScore").textContent = `${right} / ${total}`;
+  $("resMsg").textContent = pct>=85 ? "Excelente! Você está pronto para a prova." : pct>=60 ? "Bom resultado! Revise as que errou e tente de novo." : "Vale revisar o resumo e refazer as que errou.";
+  const by = s => { const a = answers.filter(x=>x.q.s===s); return a.length ? `${a.filter(x=>x.ok).length}/${a.length}` : "—"; };
+  $("resStats").innerHTML = `<div class="stat"><small>Inglês</small><b>${by("eng")}</b></div><div class="stat"><small>Química</small><b>${by("chem")}</b></div><div class="stat"><small>Aproveitamento</small><b>${pct}%</b></div><div class="stat"><small>Erros</small><b>${total-right}</b></div>`;
+  const wl = $("wrongList"); wl.innerHTML = "";
+  const wrong = answers.filter(x=>!x.ok);
+  $("retryWrong").classList.toggle("hidden", !wrong.length);
+  if(!wrong.length){ wl.innerHTML = `<p class="hint">Nenhum erro. Mandou bem!</p>`; }
+  wrong.forEach(x=>{
+    const d = document.createElement("div"); d.className = "wrong";
+    d.innerHTML = `<span class="tag ${x.q.s==="chem"?"chem":""}"></span><div class="q"></div><div class="hint"></div><div class="hint"></div><div class="hint" style="color:var(--ink)"></div>`;
+    d.children[0].textContent = x.q.t; d.children[1].textContent = x.q.q;
+    d.children[2].textContent = "Você marcou: " + x.q.o[x.chosen];
+    d.children[3].textContent = "Correta: " + x.q.o[x.q.a];
+    d.children[4].textContent = x.q.e; wl.appendChild(d);
+  });
+  $("copied").textContent = "";
+  show("result");
+  handleRanking();
+}
+$("retryWrong").onclick = ()=>{ const base = answers.filter(x=>!x.ok).map(x=>Q.find(o=>o.q===x.q.q)); startWith(base, true); };
+$("restart").onclick = ()=> show("start");
+document.querySelectorAll(".pick").forEach(b=> b.onclick = ()=>{
+  player = $("name").value.trim();
+  if(!player){ $("nameErr").textContent = "Escreva seu nome para entrar no ranking."; $("name").focus(); return; }
+  mode = b.dataset.mode;
+  startWith(mode==="mix" ? Q.slice() : Q.filter(q=>q.s===mode));
+});
+$("name").oninput = ()=> $("nameErr").textContent = "";
+$("themeBtn").onclick = ()=>{
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark";
+};
+
+// ---------- RANKING (Google) ----------
+const TOT = { eng: Q.filter(q=>q.s==="eng").length, chem: Q.filter(q=>q.s==="chem").length };
+const SUBJ = { eng: "Inglês", chem: "Química" };
+let rows = [], rankKey = "total", loaded = false;
+const gs = (window.google && google.script && google.script.run) ? google.script.run : null;
+
+function runResult(){
+  if(isRetry) return null;
+  const r = { n: player };
+  for(const s of ["eng","chem"]){ const a = answers.filter(x=>x.q.s===s); if(a.length===TOT[s]) r[s] = a.filter(x=>x.ok).length; }
+  return (r.eng!==undefined || r.chem!==undefined) ? r : null;
+}
+function scoreOf(row, k){
+  if(k==="total"){ if(row.eng==null && row.chem==null) return null; return (row.eng||0)+(row.chem||0); }
+  return row[k];
+}
+function outOf(row, k){ return k==="total" ? (row.eng!=null?TOT.eng:0)+(row.chem!=null?TOT.chem:0) : TOT[k]; }
+function sortedRows(k){ return rows.filter(r=>scoreOf(r,k)!=null && scoreOf(r,k)!==undefined).sort((a,b)=> scoreOf(b,k)-scoreOf(a,k) || String(a.name).localeCompare(String(b.name))); }
+function renderRank(){
+  const list = $("rankList"); list.innerHTML = "";
+  const rs = sortedRows(rankKey);
+  if(!rs.length){ list.innerHTML = loaded ? `<p class="hint">Ninguém entrou no ranking ainda. Seja o primeiro!</p>` : `<p class="hint">Carregando ranking…</p>`; return; }
+  rs.forEach((r,n)=>{
+    const d = document.createElement("div"); d.className = "rrow";
+    d.innerHTML = `<div class="pos ${n<3?"g"+(n+1):""}">${n+1}</div><div class="rname"></div><div class="rsc"></div>`;
+    d.children[1].textContent = r.name + (rankKey==="total" && (r.eng==null || r.chem==null) ? (r.eng!=null ? " (só Inglês)" : " (só Química)") : "");
+    d.children[2].innerHTML = `${scoreOf(r,rankKey)}<small>/${outOf(r,rankKey)}</small>`;
+    list.appendChild(d);
+  });
+}
+function setRows(data){ if(Array.isArray(data)){ rows = data; loaded = true; renderRank(); } }
+function loadRank(){ if(!gs) { $("rankList").innerHTML = `<p class="hint">Ranking indisponível nesta visualização.</p>`; return; }
+  google.script.run.withSuccessHandler(setRows).withFailureHandler(()=>{ if(!loaded) $("rankList").innerHTML = `<p class="hint">Não foi possível carregar o ranking agora.</p>`; }).getRanking(); }
+document.querySelectorAll(".tabs button").forEach(b=> b.onclick = ()=>{
+  rankKey = b.dataset.k; document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on", x===b)); renderRank();
+});
+$("copyRank").onclick = async ()=>{
+  const lines = [`Ranking do Simulado (${rankKey==="total"?"Geral":SUBJ[rankKey]}):`];
+  sortedRows(rankKey).forEach((r,n)=> lines.push(`${n+1}º ${r.name}: ${scoreOf(r,rankKey)}/${outOf(r,rankKey)}`));
+  const txt = lines.join("\n");
+  try { await navigator.clipboard.writeText(txt); $("rankCopied").textContent = "Ranking copiado! Cole no grupo."; }
+  catch(e){ $("rankCopied").textContent = txt; }
+};
+function handleRanking(){
+  const box = $("rankBox"); box.innerHTML = "";
+  const r = runResult();
+  if(!r){ box.textContent = isRetry ? "Refazer as erradas é só treino: não entra no ranking." : "Para entrar no ranking, faça o simulado até o fim, sem sair no meio."; return; }
+  if(!gs){ box.textContent = "Ranking indisponível nesta visualização."; return; }
+  box.textContent = "Salvando no ranking…";
+  google.script.run
+    .withSuccessHandler(data=>{ setRows(data); box.textContent = "Seu resultado entrou no ranking!"; })
+    .withFailureHandler(()=>{ box.textContent = "Não consegui salvar agora. Tente terminar de novo em alguns minutos."; })
+    .submitScore(r.n, r.eng===undefined?null:r.eng, r.chem===undefined?null:r.chem);
+}
+loadRank();
+setInterval(()=>{ if(!document.hidden) loadRank(); }, 20000);
+</script>
+</body>
+</html>
