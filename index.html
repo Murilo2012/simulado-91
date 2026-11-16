@@ -87,7 +87,7 @@ textarea{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);bo
     <input type="text" id="name" maxlength="24" placeholder="Ex.: Murilo">
     <div class="err" id="nameErr"></div>
     <div class="grid">
-      <button class="pick" data-mode="eng"><b>Inglês</b><span>Questões do roteiro, contrast words, prefixes, comparatives e possessives</span></button>
+      <button class="pick" data-mode="eng"><b>Inglês</b><span>Questões do roteiro, contrast words, suffixes, comparatives e possessives</span></button>
       <button class="pick" data-mode="chem"><b>Química</b><span>Tabela periódica, distribuição eletrônica, ligações iônica e covalente</span></button>
       <button class="pick" data-mode="mix"><b>Misturado</b><span>As duas matérias, em ordem aleatória</span></button>
     </div>
@@ -200,12 +200,12 @@ const Q = [
  {s:"eng",t:"Contrast words",q:"I walked to school _____ taking the bus.",o:["instead of", "instead", "although", "whereas"],a:0,e:"Instead of + verbo com -ing: instead of taking."},
  {s:"eng",t:"Contrast words",q:"The phone is cheap. _____, the battery is terrible.",o:["However", "Despite", "Unlike", "Instead of"],a:0,e:"However começa a segunda frase, com vírgula: porém."},
  {s:"eng",t:"Contrast words",q:"Guess the meaning: “The old laptop was heavy; unlike it, the new one is LIGHTWEIGHT.”",o:["very light, not heavy", "very heavy", "very old", "very expensive"],a:0,e:"Unlike mostra o contrário: o antigo era pesado, então lightweight = leve."},
- {s:"eng",t:"Prefixes",q:"What does MIS- mean in “misspell”?",o:["wrong", "again", "not", "before"],a:0,e:"Mis- = errado. Misspell = escrever errado."},
- {s:"eng",t:"Prefixes",q:"“Rewrite” means…",o:["write again", "not write", "write wrong", "write before"],a:0,e:"Re- = de novo."},
- {s:"eng",t:"Prefixes",q:"Which prefix makes the OPPOSITE of “possible”?",o:["im-", "re-", "mis-", "un-"],a:0,e:"Antes de p, b ou m, o “não” costuma ser im-: impossible."},
- {s:"eng",t:"Prefixes",q:"“I disagree with you” means…",o:["I don't agree with you", "I agree with you again", "I agree a lot", "I agreed before"],a:0,e:"Dis- = não. Disagree = discordar."},
- {s:"eng",t:"Prefixes",q:"Your answer is wrong. Please _____ the exercise. (do it again)",o:["redo", "undo", "misdo", "disdo"],a:0,e:"Re- = de novo: redo. Undo é desfazer."},
- {s:"eng",t:"Prefixes",q:"The opposite of “regular” is…",o:["irregular", "unregular", "disregular", "misregular"],a:0,e:"Antes de r, o “não” é ir-: irregular."},
+ {s:"eng",t:"Suffixes",q:"Which word is an ADJECTIVE?",o:["dangerous", "danger", "dangerously", "endanger"],a:0,e:"-ous forma adjetivo: dangerous. Danger é noun e dangerously é adverb (-ly)."},
+ {s:"eng",t:"Suffixes",q:"Being with friends brings a lot of _____. (happy)",o:["happiness", "happily", "happy", "happyness"],a:0,e:"Depois de “a lot of” vem noun: -ness. O y vira i: happiness."},
+ {s:"eng",t:"Suffixes",q:"She drives very _____. (careful)",o:["carefully", "careful", "carefulness", "carely"],a:0,e:"Para dizer COMO ela dirige, usamos adverb: -ful + -ly = carefully."},
+ {s:"eng",t:"Suffixes",q:"Words ending in -MENT, -NESS and -TION are usually…",o:["nouns", "verbs", "adjectives", "adverbs"],a:0,e:"-ment, -ness e -tion formam substantivos: enjoyment, kindness, information."},
+ {s:"eng",t:"Suffixes",q:"HELPFUL → noun = ?",o:["helpfulness", "helpfully", "helpment", "helpfulment"],a:0,e:"-ful + -ness = noun: helpfulness. Helpfully é adverb."},
+ {s:"eng",t:"Suffixes",q:"Words ending in -IFY and -IZE are usually…",o:["verbs", "nouns", "adjectives", "adverbs"],a:0,e:"-ify e -ize formam verbos: simplify, organize, fictionalize."},
  {s:"eng",t:"Comparatives",q:"This test is _____ than the last one.",o:["easier", "more easy", "easiest", "the easiest"],a:0,e:"Easy termina em -y: easier. Comparativo usa than."},
  {s:"eng",t:"Superlatives",q:"This is _____ movie I've ever seen.",o:["the best", "the goodest", "better", "the most good"],a:0,e:"Good é irregular: good, better, the best."},
  {s:"eng",t:"Superlatives",q:"He is _____ singer in Brazil.",o:["the most famous", "the famousest", "more famous", "most famous than"],a:0,e:"2 sílabas ou mais: the most + adjetivo."},
