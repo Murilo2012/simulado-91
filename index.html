@@ -2,381 +2,164 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulados · Turma 91</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulado de Matemática · Turma 91</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-:root{--bg:#f3f7fd;--card:#ffffff;--ink:#14243d;--muted:#5a6b85;--line:#d6e2f3;--blue:#1f6fd1;--navy:#0c3d7a;--sky:#e8f1fc;
---ok:#1e8e4e;--okbg:#e6f6ec;--bad:#c0392b;--badbg:#fdecea;--chem:#0f8a7e;--chembg:#e2f5f2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1622;--card:#16212f;--ink:#e6eef9;--muted:#9fb0c8;--line:#2a3a50;--blue:#5aa0ff;--navy:#9cc4ff;--sky:#1b2b42;
---ok:#4cc985;--okbg:#14301f;--bad:#ff7b6b;--badbg:#3a1a17;--chem:#3fd0bf;--chembg:#123230}}
-:root[data-theme="dark"]{--bg:#0e1622;--card:#16212f;--ink:#e6eef9;--muted:#9fb0c8;--line:#2a3a50;--blue:#5aa0ff;--navy:#9cc4ff;--sky:#1b2b42;
---ok:#4cc985;--okbg:#14301f;--bad:#ff7b6b;--badbg:#3a1a17;--chem:#3fd0bf;--chembg:#123230}
+:root{--page:#f3f7fd;--surface-2:#ffffff;--border:#d6e2f3;--border-strong:#b9cbe4;--bg-neutral:#eaf0f8;--text-primary:#14243d;--text-secondary:#5a6b85;--text-danger:#c0392b;--text-success:#1e8e4e;--bg-success:#e6f6ec;--bg-danger:#fdecea;--bg-accent:#e8f1fc;--text-accent:#1f6fd1;--radius:10px;--font-mono:ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#0e1622;--surface-2:#16212f;--border:#2a3a50;--border-strong:#3c5170;--bg-neutral:#1d2a3b;--text-primary:#e6eef9;--text-secondary:#9fb0c8;--text-danger:#ff7b6b;--text-success:#4cc985;--bg-success:#14301f;--bg-danger:#3a1a17;--bg-accent:#1b2b42;--text-accent:#5aa0ff}}
+:root[data-theme="dark"]{--page:#0e1622;--surface-2:#16212f;--border:#2a3a50;--border-strong:#3c5170;--bg-neutral:#1d2a3b;--text-primary:#e6eef9;--text-secondary:#9fb0c8;--text-danger:#ff7b6b;--text-success:#4cc985;--bg-success:#14301f;--bg-danger:#3a1a17;--bg-accent:#1b2b42;--text-accent:#5aa0ff}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:16px;line-height:1.55}
-.wrap{max-width:720px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:26px;margin:4px 0 2px;color:var(--navy);font-weight:800}
-.sub{color:var(--muted);margin:0 0 18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
-.pick{text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:16px;cursor:pointer;font:inherit}
-.pick:hover{border-color:var(--blue)}
-.pick b{display:block;font-size:18px;color:var(--navy)}
-.pick span{color:var(--muted);font-size:14px}
-label{font-weight:600;font-size:14px;color:var(--muted)}
-input[type=text]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--bg);color:var(--ink);margin-top:6px}
-.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);gap:8px}
-.bar{height:6px;background:var(--sky);border-radius:4px;margin:8px 0 16px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
-.tag{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:20px;background:var(--sky);color:var(--blue)}
-.tag.chem{background:var(--chembg);color:var(--chem)}
-.tag.port{background:#f3e8fd;color:#7b3fbf}
-.q{font-size:17px;font-weight:600;margin:10px 0 6px}
-.text{background:var(--sky);border-radius:10px;padding:12px 14px;font-size:15px;margin:8px 0;font-style:italic}
-.opt{display:flex;gap:10px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
-.opt:hover:not(:disabled){border-color:var(--blue)}
-.opt .l{font-weight:800;color:var(--blue);min-width:20px}
-.opt.ok{border-color:var(--ok);background:var(--okbg)}
-.opt.bad{border-color:var(--bad);background:var(--badbg)}
-.opt:disabled{cursor:default}
-.fb{border-radius:12px;padding:12px 14px;margin-top:10px;font-size:15px}
-.fb.ok{background:var(--okbg);color:var(--ok)}
-.fb.bad{background:var(--badbg);color:var(--bad)}
-.fb p{margin:4px 0 0;color:var(--ink)}
-.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.btn{flex:1;min-width:120px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-.btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
-.big{font-size:44px;font-weight:800;color:var(--navy);margin:6px 0}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
-.stat{background:var(--sky);border-radius:12px;padding:12px}
-.stat small{color:var(--muted);display:block}
-.stat b{font-size:22px}
-.wrong{border-top:1px solid var(--line);padding:12px 0}
-.wrong:first-child{border-top:0}
-.wrong .q{font-size:15px;margin:4px 0}
-.hint{font-size:14px;color:var(--muted)}
-.copied{font-size:14px;color:var(--ok);min-height:20px;margin-top:6px}
-.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
-.hidden{display:none}
-.err{color:var(--bad);font-size:14px;min-height:20px;margin-top:4px}
-.rank{margin-top:18px}
-.rank h2{font-size:20px;margin:0 0 4px;color:var(--navy)}
-.tabs{display:flex;gap:6px;margin:10px 0}
-.tabs button{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-.tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.rrow{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line)}
-.rrow:first-child{border-top:0}
-.pos{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--sky);color:var(--navy);flex:none}
-.pos.g1{background:#f6c445;color:#5a3d00}.pos.g2{background:#cfd6df;color:#2b3440}.pos.g3{background:#e0a46b;color:#4a2a0b}
-.rname{flex:1;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rsc{font-weight:800;color:var(--navy)}
-.rsc small{color:var(--muted);font-weight:600}
-.code{font-family:ui-monospace,Menlo,monospace;font-size:13px;word-break:break-all;background:var(--sky);border-radius:10px;padding:10px;margin:8px 0}
-textarea{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:var(--bg);color:var(--ink)}
-.note{background:var(--sky);border-radius:12px;padding:12px 14px;font-size:15px;margin-top:14px}
+body{margin:0;background:var(--page);color:var(--text-primary);font-family:Nunito,system-ui,sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:720px;margin:0 auto;padding:18px 14px 60px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--text-secondary)}
+.head a{color:var(--text-accent);text-decoration:none;font-weight:600}
+h1{font-size:26px;margin:10px 0 2px;color:var(--text-primary)}
+.sub{color:var(--text-secondary);margin:0 0 14px}
+button{font:inherit;color:var(--text-primary);background:transparent;border:1px solid var(--border-strong);border-radius:var(--radius);padding:7px 14px;cursor:pointer}
+button:hover{background:var(--bg-neutral)}
+button:disabled{cursor:default}
+input{font:inherit;color:var(--text-primary);background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius);height:38px;padding:0 10px}
+input:focus{outline:2px solid var(--text-accent);outline-offset:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.theme{border-radius:20px;padding:4px 12px;font-size:13px;color:var(--text-secondary)}
+.nav button{border:none}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><span>9º ano · Prova Trimestral</span><button class="theme" id="themeBtn">Tema</button></div>
-  <h1>Simulados · Turma 91</h1>
-  <p class="sub">Responda, veja a explicação na hora e confira sua nota no final.</p>
-
-  <section id="start" class="card">
-    <label for="name">Seu nome (aparece no ranking)</label>
-    <input type="text" id="name" maxlength="24" placeholder="Ex.: Murilo">
-    <div class="err" id="nameErr"></div>
-    <div class="grid">
-      <a class="pick" href="matematica.html" style="text-decoration:none;display:block"><b>Matemática</b><span>Funções, estatística, intervalo de classe, trigonometria e relações métricas · modo jogo</span></a>
-      <button class="pick" data-mode="port"><b>Português</b><span>Roteiro, crase, regência, colocação, formação de palavras e o livro</span></button>
-    </div>
-    <p class="hint">As questões seguem o roteiro de estudos da prof.ª Juliana. As alternativas são embaralhadas a cada tentativa.</p>
-  </section>
-
-  <section id="quiz" class="card hidden">
-    <div class="top"><span id="prog"></span><span id="score"></span></div>
-    <div class="bar"><i id="barFill"></i></div>
-    <span class="tag" id="tag"></span>
-    <div id="passage"></div>
-    <div class="q" id="question"></div>
-    <div id="opts"></div>
-    <div id="fb"></div>
-    <div class="row">
-      <button class="btn" id="quitBtn">Sair</button>
-      <button class="btn main hidden" id="nextBtn">Próxima</button>
-    </div>
-  </section>
-
-  <section id="result" class="card hidden">
-    <div class="hint" id="resName"></div>
-    <div class="big" id="resScore"></div>
-    <div id="resMsg"></div>
-    <div class="stats" id="resStats"></div>
-    <div class="row">
-      <button class="btn main" id="retryWrong">Refazer as que errei</button>
-      <button class="btn" id="restart">Começar de novo</button>
-    </div>
-    <div id="rankBox" class="note"></div>
-    <div class="copied" id="copied"></div>
-    <h3 style="margin:18px 0 6px;color:var(--navy)">Revise o que errou</h3>
-    <div id="wrongList"></div>
-  </section>
-
-  <section class="card rank" id="rankCard">
-    <h2>Ranking da turma</h2>
-    <div class="hint">Conta a melhor nota de cada pessoa em cada matéria (só simulados feitos até o fim). Atualiza sozinho.</div>
-    <div class="tabs">
-      <button data-k="port" class="on">Português</button>
-    </div>
-    <div id="rankList"><p class="hint">Carregando ranking…</p></div>
-    <div class="row"><button class="btn" id="copyRank">Copiar ranking</button></div>
-    <div class="copied" id="rankCopied"></div>
-  </section>
-
-
-</div>
-
+<div class="head"><span>9º ano · Prova Trimestral · Turma 91</span><button class="theme" id="themeBtn">Tema</button></div>
+<h1>Simulado de Matemática</h1>
+<p class="sub">Uma questão por vez, com pontos, sequência de acertos e resolução passo a passo.</p>
+<style>
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:.5rem 0 .6rem}
+.chip{font-size:12px;padding:4px 10px;border-radius:999px;font-weight:600}
+.bar{height:8px;background:var(--bg-neutral);border-radius:99px;overflow:hidden;margin-bottom:12px}
+.bar>div{height:100%;background:#1D9E75;transition:width .3s}
+.stat{display:flex;align-items:center;gap:5px;font-size:14px;background:var(--bg-neutral);padding:5px 10px;border-radius:var(--radius)}
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.25rem}
+.qt{font-size:18px;font-weight:600;line-height:1.5;margin:0 0 6px}
+.og{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:10px}
+.op{text-align:left;padding:12px 14px;font-size:15px;border-radius:12px;min-height:48px}
+.op.sel{border:2px solid #378ADD;background:var(--bg-accent);color:var(--text-accent)}
+.op.right{border:2px solid #1D9E75;background:var(--bg-success);color:var(--text-success)}
+.op.wrong{border:2px solid #E24B4A;background:var(--bg-danger);color:var(--text-danger)}
+.fld{display:inline-flex;flex-direction:column;gap:3px;margin:6px 10px 4px 0;font-size:13px;color:var(--text-secondary)}.fld input{width:100px;font-size:16px}
+.res{border-radius:12px;padding:12px 14px;margin-top:12px;font-size:15px;line-height:1.6}
+.tb{border-collapse:collapse;font-size:14px;margin:8px 0}.tb td,.tb th{border:1px solid var(--border-strong);padding:4px 10px;text-align:center}
+.nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.4rem}.nav button{font-size:12px;padding:5px 11px;border-radius:999px;font-weight:600}
+.pop{color:#1D9E75;font-weight:600;margin-left:4px}
+</style>
+<h2 class="sr-only">Quiz em formato de jogo com 35 questões de matemática, gráficos clicáveis e placar.</h2>
+<div class="nav" id="nav"></div>
+<div id="hud"></div>
+<div id="app"><div class="card">Carregando o jogo…</div></div>
+<div class="card" style="margin-top:18px"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><div style="font-size:18px;font-weight:800"><i class="ti ti-trophy" aria-hidden="true" style="color:#BA7517"></i> Ranking da turma</div><button id="rkBtn" style="font-size:13px">Atualizar</button></div><div style="font-size:13px;color:var(--text-secondary);margin:4px 0 8px">Vale a melhor pontuação de cada pessoa no simulado completo (35 questões).</div><div id="rk">Carregando…</div></div>
 <script>
-const API = "https://script.google.com/macros/s/AKfycbyck0co983cJQApEy4_ZZ7mdfEFPWO9ysO5V-FxGeoc_Ec6o61E7UFalYnjFPYKMfzGKQ/exec";
-function apiCall(params, ok, fail) {
-  fetch(API + "?" + new URLSearchParams(params), { redirect: "follow" })
-    .then(r => r.json())
-    .then(d => { if (d.ok) { ok && ok(d.data); } else { fail && fail(new Error(d.error)); } })
-    .catch(e => { fail && fail(e); });
-}
-function makeRunner(ok, fail) {
-  return {
-    withSuccessHandler: h => makeRunner(h, fail),
-    withFailureHandler: h => makeRunner(ok, h),
-    getRanking: () => apiCall({ action: "rank" }, ok, fail),
-    submitScore: (n, e, c, p) => apiCall({ action: "submit", name: n, eng: e == null ? "" : e, chem: c == null ? "" : c, port: p == null ? "" : p }, ok, fail)
-  };
-}
-window.google = { script: { get run() { return makeRunner(null, null); } } };
-</script>
-
-<script>
-const PASSAGE = "In the 1980s, teenagers listened to music on cassette tapes and Walkmans. In the 2000s, MP3 players became very popular. Today, most young people stream songs on their phones. The way we listen to music has changed a lot in the last forty years.";
-const Q = [
- // ---------- PORTUGUÊS ----------
- {s:"port",t:"Roteiro · Q2",q:"(a) Corrija: “Ninguém contou-me o resultado.”",o:["Ninguém me contou o resultado. (o pronome indefinido “ninguém” atrai)", "Ninguém contou-me o resultado. (já está certo)", "Contou-me ninguém o resultado.", "Ninguém contou o me resultado."],a:0,e:"Palavras negativas e pronomes indefinidos como “ninguém” atraem o pronome: próclise."},
- {s:"port",t:"Roteiro · Q2",q:"(b) Corrija: “Me devolveram os livros ontem.”",o:["Devolveram-me os livros ontem. (não se inicia frase com pronome oblíquo)", "Me devolveram os livros ontem. (já está certo)", "Devolveram os livros-me ontem.", "Os livros me-devolveram ontem."],a:0,e:"Na norma-padrão, não se começa a frase com pronome oblíquo átono: usa-se ênclise."},
- {s:"port",t:"Roteiro · Q2",q:"(c) Corrija: “Quando encontraram-nos, já era tarde.”",o:["Quando nos encontraram, já era tarde. (a conjunção “quando” atrai)", "Quando encontraram-nos, já era tarde. (já está certo)", "Quando encontraram nos, já era tarde.", "Nos encontraram quando já era tarde."],a:0,e:"Conjunções subordinativas (quando, se, que, embora…) atraem o pronome: próclise."},
- {s:"port",t:"Roteiro · Q3",q:"Em qual alternativa a próclise é exigida por um elemento atrativo?",o:["Os estudantes se reuniram no pátio.", "Talvez nos comuniquem a decisão ainda hoje.", "A diretora entregou-nos os certificados.", "Os atletas preparam-se para a competição."],a:1,e:"Advérbios como “talvez” (dúvida) atraem o pronome. Em A, a próclise é opcional (sujeito antes do verbo), não exigida."},
- {s:"port",t:"Roteiro · Q4",q:"Por que muda a posição do pronome em “Apresentam-se hoje os candidatos” e “Os candidatos não se apresentam hoje”?",o:["Na 1ª, o verbo inicia a frase → ênclise; na 2ª, o advérbio “não” atrai o pronome → próclise.", "Na 1ª há próclise; na 2ª, ênclise.", "As duas estão em próclise; só muda a ordem do sujeito.", "Na 1ª o pronome é reflexivo e na 2ª não é."],a:0,e:"Verbo no início = ênclise. Palavra negativa (não, nunca, jamais) = próclise."},
- {s:"port",t:"Roteiro · Q6",q:"Assinale a alternativa em que o acento indicativo de crase foi empregado corretamente.",o:["A pesquisadora se dedicou à investigar os resultados.", "A comissão fez referência àquelas propostas.", "O comunicado foi enviado à todos os participantes.", "O diretor começou à explicar as mudanças."],a:1,e:"Fazer referência a + aquelas = àquelas. Não há crase antes de verbo (investigar, explicar) nem antes de pronome indefinido (todos)."},
- {s:"port",t:"Roteiro · Q7",q:"Complete: “A equipe chegou ___ escola ___ oito horas, apresentou o projeto ___ coordenadoras e retornou ___ atividades habituais.”",o:["à – às – às – às", "à – as – às – as", "a – às – as – às", "à – às – as – as"],a:0,e:"Chegar a + a escola = à. Hora determinada: às oito. Apresentar algo a + as coordenadoras = às. Retornar a + as atividades = às. Teste do baú: “retornou aos baús”."},
- {s:"port",t:"Roteiro · Q9",q:"(a) “Referiu-se àquela notícia.” — por que há crase?",o:["Referir-se pede “a” + pronome demonstrativo “aquela” = àquela.", "Porque “aquela” é pronome relativo.", "Porque toda palavra feminina leva crase.", "Não deveria haver crase."],a:0,e:"Preposição “a” + “aquele(s), aquela(s), aquilo” = àquele, àquela, àquilo."},
- {s:"port",t:"Roteiro · Q9",q:"(b) “Começou a estudar.” — por que não há crase?",o:["Não há crase antes de verbo.", "Porque “estudar” é masculino plural.", "Porque “começar” não pede preposição.", "Deveria haver crase: começou à estudar."],a:0,e:"Verbo não aceita artigo, então só existe a preposição “a”."},
- {s:"port",t:"Roteiro · Q9",q:"(c) “Ficaram frente a frente.” — por que não há crase?",o:["Em expressões com palavras repetidas não há crase.", "Porque “frente” é masculino.", "Porque é locução adverbial feminina.", "Deveria haver crase: frente à frente."],a:0,e:"Palavras repetidas (frente a frente, cara a cara, gota a gota): sem crase."},
- {s:"port",t:"Roteiro · Q9",q:"(d) “O encontro será às 14 horas.” — por que há crase?",o:["Indicação de hora determinada leva crase.", "Porque “encontro” pede preposição.", "Porque 14 é número par.", "Não deveria haver crase."],a:0,e:"Horas exatas: às 14 horas, à uma hora, às oito."},
- {s:"port",t:"Roteiro · Q10",q:"Assinale a alternativa em que a ausência de crase é obrigatória.",o:["A equipe prestou homenagem a professora.", "Os visitantes foram a exposição de ciências.", "A pesquisadora fez alusão a uma descoberta recente.", "A aluna se dirigiu a secretaria da escola."],a:2,e:"Antes de artigo indefinido (uma) nunca há crase. Nas outras, a crase seria obrigatória (à professora, à exposição, à secretaria)."},
- {s:"port",t:"Roteiro · Q11",q:"Assinale a alternativa que respeita a regência verbal da norma-padrão.",o:["Os alunos assistiram o documentário com atenção.", "A equipe obedeceu às orientações da coordenação.", "Prefiro mais estudar em casa do que na biblioteca.", "Os estudantes aspiram uma vaga na universidade."],a:1,e:"Obedecer a algo. Assistir (ver) pede “a”: assistiram ao documentário. Preferir: prefiro X a Y (sem “mais” e sem “do que”). Aspirar (desejar) pede “a”: aspiram a uma vaga."},
- {s:"port",t:"Roteiro · Q12",q:"(a) Corrija: “Prefiro leitura do que televisão.”",o:["Prefiro leitura à televisão.", "Prefiro mais leitura do que televisão.", "Prefiro leitura que televisão.", "Já está correta."],a:0,e:"Preferir algo A algo: prefiro leitura à (a + a) televisão."},
- {s:"port",t:"Roteiro · Q12",q:"(b) “O atleta aspirava ao título.” Está correta?",o:["Sim: aspirar no sentido de desejar pede a preposição “a”.", "Não: o correto é “aspirava o título”.", "Não: o correto é “aspirava pelo título”.", "Não: o correto é “aspirava do título”."],a:0,e:"Aspirar = desejar → aspirar a. Aspirar = respirar/sugar → sem preposição (aspirar o perfume)."},
- {s:"port",t:"Roteiro · Q12",q:"(c) “A turma assistiu ao espetáculo.” Está correta?",o:["Sim: assistir no sentido de ver pede a preposição “a”.", "Não: o correto é “assistiu o espetáculo”.", "Não: o correto é “assistiu do espetáculo”.", "Não: o correto é “assistiu no espetáculo”."],a:0,e:"Assistir = ver → assistir a. Assistir = ajudar → sem preposição (o médico assistiu o paciente)."},
- {s:"port",t:"Roteiro · Q12",q:"(d) “Os estudantes simpatizaram com a proposta.” Está correta?",o:["Sim: simpatizar pede a preposição “com” e não é pronominal.", "Não: o correto é “simpatizaram-se com a proposta”.", "Não: o correto é “simpatizaram a proposta”.", "Não: o correto é “simpatizaram da proposta”."],a:0,e:"Simpatizar com algo/alguém, sem “se”."},
- {s:"port",t:"Roteiro · Q13",q:"Na forma verbal “cantávamos”, a segmentação morfológica adequada é:",o:["cant- (radical), -a- (vogal temática), -va- (desinência modo-temporal), -mos (desinência número-pessoal)", "canta- (prefixo), -va- (radical), -mos (sufixo)", "cant- (radical), -ávamos (prefixo)", "cantáv- (radical), -a- (vogal temática), -mos (desinência de gênero)"],a:0,e:"Radical + vogal temática + desinência modo-temporal (-va: pretérito imperfeito) + desinência número-pessoal (-mos: nós)."},
- {s:"port",t:"Roteiro · Q14",q:"Na forma verbal “vendíamos”, os elementos mórficos são:",o:["vend- (radical), -i- (vogal temática), -a- (desinência modo-temporal), -mos (desinência número-pessoal)", "ven- (radical), -dia- (vogal temática), -mos (sufixo)", "vendi- (radical), -amos (desinência de gênero)", "vend- (prefixo), -íamos (radical)"],a:0,e:"Verbo da 2ª conjugação: a vogal temática “e” aparece como “i”. -ia/-a marca o pretérito imperfeito e -mos indica “nós”."},
- {s:"port",t:"Roteiro · Q15",q:"Assinale a alternativa em que as três palavras pertencem à mesma família lexical.",o:["pedra, pedreiro, pedregulho", "mar, martelo, marítimo", "flor, floresta, florescer", "sol, solução, solar"],a:0,e:"pedr- é o radical comum e todas têm a ver com pedra. “Martelo” e “solução” só parecem. Atenção: “floresta” não vem de “flor” na origem, por isso C é a armadilha (confirme com a professora)."},
- {s:"port",t:"Roteiro · Q16",q:"(a) Processo de formação de “infelizmente”:",o:["Derivação prefixal e sufixal (in- + feliz + -mente)", "Derivação parassintética", "Composição por aglutinação", "Derivação imprópria"],a:0,e:"Existem “infeliz” e “felizmente”: dá para tirar o prefixo OU o sufixo e a palavra continua existindo."},
- {s:"port",t:"Roteiro · Q16",q:"(b) Processo de formação de “anoitecer”:",o:["Derivação parassintética (a- + noite + -ecer, ao mesmo tempo)", "Derivação prefixal e sufixal", "Derivação regressiva", "Composição por justaposição"],a:0,e:"Não existem “anoite” nem “noitecer”: prefixo e sufixo entraram juntos."},
- {s:"port",t:"Roteiro · Q16",q:"(c) Processo de formação de “passatempo”:",o:["Composição por justaposição (passa + tempo, sem perda de sons)", "Composição por aglutinação", "Derivação sufixal", "Hibridismo"],a:0,e:"As duas palavras se juntam inteiras."},
- {s:"port",t:"Roteiro · Q16",q:"(d) Processo de formação de “planalto”:",o:["Composição por aglutinação (plano + alto, com perda de sons)", "Composição por justaposição", "Derivação prefixal", "Derivação parassintética"],a:0,e:"“Plano” perdeu o “o”: houve fusão = aglutinação."},
- {s:"port",t:"Roteiro · Q16",q:"(e) Processo de formação de “o jantar” (em “O jantar estava pronto”):",o:["Derivação imprópria (verbo virou substantivo)", "Derivação regressiva", "Derivação sufixal", "Composição"],a:0,e:"A palavra não muda de forma, só de classe: imprópria."},
- {s:"port",t:"Roteiro · Q17",q:"Qual alternativa apresenta, respectivamente, derivação regressiva e derivação imprópria?",o:["combate (de combater) / o olhar (substantivo)", "desleal / guarda-chuva", "amanhecer / planalto", "infelizmente / livraria"],a:0,e:"Regressiva: o verbo perde a terminação e vira substantivo (combater → combate). Imprópria: muda a classe sem mudar a forma (o olhar)."},
- {s:"port",t:"Roteiro · Q18",q:"Qual a diferença entre “envelhecer” e “infelizmente”?",o:["Envelhecer é parassintética (não existem “envelho” nem “velhecer”); infelizmente é prefixal e sufixal (existem “infeliz” e “felizmente”).", "As duas são parassintéticas.", "Envelhecer é composição e infelizmente é derivação regressiva.", "Envelhecer é prefixal e sufixal; infelizmente é parassintética."],a:0,e:"Teste: tire só o prefixo e depois só o sufixo. Se as duas formas existirem → prefixal e sufixal. Se não existirem → parassintética."},
- {s:"port",t:"Roteiro · Q19",q:"I. “Guarda-roupa” é composição por justaposição. II. “Aguardente” é composição por aglutinação. III. “Desfazer” tem prefixo de negação ou reversão. IV. Em “meninas”, o -s é desinência de gênero. Assinale:",o:["Apenas I e IV", "Apenas II e III", "Apenas I, II e III", "I, II, III e IV"],a:2,e:"IV está errada: o -s é desinência de NÚMERO (plural). A desinência de gênero é o -a."},
- {s:"port",t:"Roteiro · Q20",q:"(Livro) O julgamento de Tom Robinson revela que:",o:["O preconceito pesou mais que as provas: mesmo com indícios de inocência (agressor canhoto, braço esquerdo de Tom atrofiado), o júri branco o condenou.", "Tom foi condenado porque confessou o crime.", "Atticus não apresentou nenhuma prova a favor de Tom.", "O júri absolveu Tom, mas a cidade não aceitou."],a:0,e:"As provas apontavam para Bob Ewell (canhoto), mas a palavra de um negro valia menos em Maycomb."},
- {s:"port",t:"Roteiro · Q21",q:"(Livro) Um acontecimento que mostra o amadurecimento de Jem é:",o:["A condenação de Tom: Jem chora e percebe que a justiça de Maycomb é racista.", "Ganhar a espingarda de ar no Natal.", "Fazer o boneco de neve.", "Brincar de encenar a vida de Boo."],a:0,e:"Jem acreditava que a verdade vencia; o veredito destrói essa inocência."},
- {s:"port",t:"Roteiro · Q22",q:"(Livro) Como muda a visão das crianças sobre Boo Radley?",o:["De “monstro” das lendas para um vizinho bondoso que as protege e as salva de Bob Ewell.", "De amigo para inimigo.", "Elas nunca descobrem quem ele é.", "Continuam com medo dele até o fim."],a:0,e:"Presentes na árvore, calça costurada, cobertor no incêndio e o resgate final: não se deve julgar pelas aparências."},
- {s:"port",t:"Extra · Colocação",q:"Qual frase está de acordo com a norma-padrão?",o:["Tudo se resolveu rapidamente.", "Tudo resolveu-se rapidamente.", "Se tudo resolveu rapidamente.", "Tudo resolveu se rapidamente."],a:0,e:"Pronome indefinido “tudo” atrai: próclise."},
- {s:"port",t:"Extra · Colocação",q:"Qual frase está correta?",o:["Espero que me ligue amanhã.", "Espero que ligue-me amanhã.", "Espero ligue-me que amanhã.", "Me espero que ligue amanhã."],a:0,e:"A conjunção “que” atrai o pronome."},
- {s:"port",t:"Extra · Colocação",q:"Em “Deus te abençoe!”, a próclise acontece porque:",o:["Frases que expressam desejo (optativas) pedem próclise.", "“Deus” é pronome.", "O verbo está no futuro.", "Toda frase com ponto de exclamação tem próclise."],a:0,e:"Orações optativas (de desejo) atraem o pronome."},
- {s:"port",t:"Extra · Colocação",q:"Qual frase tem ERRO de colocação pronominal?",o:["Me empresta o caderno?", "Empresta-me o caderno?", "Não me empresta o caderno?", "Quem me empresta o caderno?"],a:0,e:"Na norma-padrão, não se começa frase com pronome oblíquo átono."},
- {s:"port",t:"Extra · Crase",q:"Use o teste do baú: em “Fui ___ feira”, troque por uma palavra masculina.",o:["“Fui ao baú” → há crase: Fui à feira.", "“Fui o baú” → não há crase: Fui a feira.", "Não dá para testar.", "“Fui do baú” → há crase."],a:0,e:"Se no masculino aparece “ao”, no feminino é “à”."},
- {s:"port",t:"Extra · Crase",q:"Em qual frase NÃO deve haver crase?",o:["Ela começou a chorar.", "Vou à praia amanhã.", "Saímos às sete.", "Refiro-me àquela situação."],a:0,e:"Antes de verbo não há crase."},
- {s:"port",t:"Extra · Crase",q:"“Vou ___ Bahia” e “Vou ___ Curitiba”:",o:["à / a", "a / à", "à / à", "a / a"],a:0,e:"Teste: “volto DA Bahia” (tem artigo) → à Bahia. “Volto DE Curitiba” (sem artigo) → a Curitiba."},
- {s:"port",t:"Extra · Crase",q:"Qual frase está correta?",o:["Fizemos tudo às pressas.", "Fizemos tudo as pressas.", "Fizemos tudo à pressas.", "Fizemos tudo ás pressas."],a:0,e:"Locuções adverbiais femininas levam crase: às pressas, à noite, às vezes, à vontade."},
- {s:"port",t:"Extra · Crase",q:"Em qual frase há ERRO?",o:["Entreguei o trabalho à ele.", "Entreguei o trabalho à professora.", "Entreguei o trabalho a ela.", "Entreguei o trabalho às professoras."],a:0,e:"Antes de pronome pessoal (ele, ela) não há crase."},
- {s:"port",t:"Extra · Regência",q:"Qual frase está correta?",o:["Ele chegou ao colégio cedo.", "Ele chegou no colégio cedo.", "Ele chegou em o colégio cedo.", "Ele chegou do colégio cedo para entrar."],a:0,e:"Chegar (destino) pede “a”: chegar a algum lugar."},
- {s:"port",t:"Extra · Regência",q:"“O médico assistiu o paciente” significa:",o:["O médico ajudou/atendeu o paciente.", "O médico viu o paciente na TV.", "O médico morou com o paciente.", "A frase está errada."],a:0,e:"Assistir sem preposição = ajudar, dar assistência."},
- {s:"port",t:"Extra · Regência",q:"Qual frase está de acordo com a norma-padrão?",o:["Esqueci o caderno. / Esqueci-me do caderno.", "Esqueci do caderno. / Esqueci-me o caderno.", "Esqueci-me o caderno.", "Esqueci ao caderno."],a:0,e:"Sem pronome, sem preposição (esqueci o); com pronome, com “de” (esqueci-me do)."},
- {s:"port",t:"Extra · Regência",q:"Qual frase está correta quanto à regência do verbo “visar”?",o:["O projeto visa ao bem-estar dos alunos.", "O projeto visa no bem-estar dos alunos.", "O projeto visa com o bem-estar.", "O projeto visa do bem-estar."],a:0,e:"Visar = ter como objetivo → visar a (visa ao). Visar = mirar ou dar visto → sem preposição."},
- {s:"port",t:"Extra · Regência",q:"Qual frase está correta?",o:["Namoro Ana há dois anos.", "Namoro com Ana há dois anos.", "Namoro a com Ana há dois anos.", "Namoro em Ana há dois anos."],a:0,e:"Na norma-padrão, namorar é transitivo direto: namorar alguém."},
- {s:"port",t:"Extra · Estrutura",q:"Em “gatinhas”, os elementos -inh-, -a e -s são:",o:["sufixo diminutivo, desinência de gênero, desinência de número", "prefixo, radical, sufixo", "vogal temática, sufixo, desinência de gênero", "radical, vogal temática, sufixo"],a:0,e:"gat (radical) + -inh- (sufixo) + -a (gênero feminino) + -s (número plural)."},
- {s:"port",t:"Extra · Estrutura",q:"Em “estudáramos”, o elemento -ra- é:",o:["desinência modo-temporal (pretérito mais-que-perfeito)", "vogal temática", "radical", "desinência número-pessoal"],a:0,e:"estud- (radical) + -a- (VT) + -ra- (DMT) + -mos (DNP)."},
- {s:"port",t:"Extra · Formação",q:"“Fotografia” e “cinema” viraram “foto” e “cine”. Esse processo é:",o:["Abreviação (redução)", "Derivação regressiva", "Hibridismo", "Onomatopeia"],a:0,e:"A palavra é encurtada e mantém o sentido."},
- {s:"port",t:"Extra · Formação",q:"A palavra “tique-taque” foi formada por:",o:["Onomatopeia", "Abreviação", "Sigla", "Derivação imprópria"],a:0,e:"Imita um som."},
- {s:"port",t:"Extra · Formação",q:"“Desleal” é formada por:",o:["Derivação prefixal", "Derivação sufixal", "Parassíntese", "Aglutinação"],a:0,e:"des- + leal."},
- {s:"port",t:"Extra · Formação",q:"“Embarcar” é formada por:",o:["Derivação parassintética (em- + barco + -ar)", "Derivação prefixal", "Composição por justaposição", "Derivação regressiva"],a:0,e:"Não existem “embarco” (como substantivo) nem “barcar”: prefixo e sufixo juntos."},
- {s:"port",t:"Extra · Formação",q:"“Girassol” é formada por:",o:["Composição por justaposição", "Composição por aglutinação", "Derivação sufixal", "Derivação parassintética"],a:0,e:"gira + sol, sem perda de sons (só dobrou o “s” na escrita)."},
- {s:"port",t:"Extra · Formação",q:"“Pernalta” (perna + alta) é formada por:",o:["Composição por aglutinação", "Composição por justaposição", "Derivação prefixal", "Hibridismo"],a:0,e:"“Perna” perdeu o “a”: fusão = aglutinação."},
- {s:"port",t:"Vestibular · FGV",q:"Assinale a alternativa em que a regência verbal está de acordo com a norma culta.",o:["As crianças, obviamente, preferem mais os doces do que os legumes e verduras.", "Assista uma TV de LCD pelo preço de uma de projeção e leve junto um Home Theater!", "O jóquei Nélson de Sousa foi para Inglaterra visando títulos e euros.", "Construir impérios a partir do nada implica inovação e paixão pelo risco.", "A Caixa Econômica informou os mutuários que não haverá prorrogação de prazos."],a:3,e:"Implicar (acarretar) é transitivo direto: implica inovação. Preferir não aceita “mais… do que”; assistir (ver) pede “a”; visar (objetivo) pede “a”; informar alguém DE algo."},
- {s:"port",t:"Vestibular · FEI",q:"Assinale a alternativa em que haja erro de regência verbal:",o:["Deu-lhe um belo presente de aniversário.", "Levei-o para o médico esta manhã.", "Gostamos deste novo filme.", "Fui no cinema ontem.", "O lenço caiu no chão."],a:3,e:"Ir (destino) pede “a”: fui ao cinema."},
- {s:"port",t:"Vestibular · Fiocruz",q:"Assinale a frase onde a regência do verbo assistir está errada.",o:["Assistimos um belo espetáculo de dança a semana passada.", "Não assisti à missa.", "Os médicos assistiram os doentes durante a epidemia.", "O técnico assistiu os jogadores."],a:0,e:"Assistir = ver pede “a”: assistimos a um belo espetáculo. Em C e D, assistir = ajudar (sem preposição)."},
- {s:"port",t:"Vestibular · ITA",q:"Sobre “aspirar” (desejar) e “preferir”, a frase correta é:",o:["Antes prefiro aspirar uma posição honesta que ficar aqui.", "Prefiro aspirar uma posição honesta que ficar aqui.", "Prefiro aspirar a uma posição honesta que ficar aqui.", "Prefiro antes aspirar a uma posição honesta que ficar aqui.", "Prefiro aspirar a uma posição honesta a ficar aqui."],a:4,e:"Aspirar a (desejar) e preferir X a Y."},
- {s:"port",t:"Vestibular · Fuvest",q:"Preencha: “Posso informar ___ senhores ___ ninguém, na reunião, ousou aludir ___ tão delicado assunto.”",o:["aos – de que – o", "aos – de que – ao", "aos – que – à", "os – que – à", "os – de que – a"],a:4,e:"Informar alguém (os senhores) DE algo (de que); aludir A (a tão delicado assunto: “assunto” é masculino e não tem artigo)."},
- {s:"port",t:"Vestibular · PUC-Campinas",q:"Em qual frase a relação entre os verbos e o complemento está correta?",o:["Ontem conhecemos e simpatizamos muito com seu amigo.", "Ela comete e depois se arrepende dos desatinos.", "Aprovo sua proposta, mas não concordo inteiramente.", "Ele não se esqueceu nem perdoou a ofensa.", "Presenciamos e deploramos a reação do atleta."],a:4,e:"Os dois verbos só podem dividir o complemento se tiverem a mesma regência. Presenciar e deplorar são ambos transitivos diretos."},
- {s:"port",t:"Vestibular · Banco do Brasil",q:"“O gerente dirigiu-se ___ sua sala e pôs-se ___ falar ___ todas as pessoas convocadas.”",o:["à – à – à", "a – à – à", "à – a – a", "a – a – à", "à – a – à"],a:2,e:"Dirigir-se à sala; a + verbo (falar) sem crase; a + todas (pronome indefinido) sem crase."},
- {s:"port",t:"Vestibular · FGV",q:"Assinale a alternativa em que está correto o uso do acento indicativo de crase:",o:["O autor se comparou à alguém que tem boa memória.", "Ele se referiu às pessoas de boa memória.", "As pessoas aludem à uma causa específica.", "Ele passou a ser entendido à partir de suas reflexões sobre a memória.", "Os livros foram entregues à ele."],a:1,e:"Referir-se a + as pessoas = às. Não há crase antes de “alguém”, “uma”, verbo (partir) ou pronome pessoal (ele)."},
- {s:"port",t:"Vestibular · Cesgranrio",q:"Assinale a frase em que à ou às está mal empregado.",o:["Amores à vista.", "Referi-me às sem-razões do amor.", "Desobedeci às limitações sentimentais.", "Estava meu coração à mercê das paixões.", "Submeteram o amor à provações difíceis."],a:4,e:"“à” (singular) antes de “provações” (plural) só tem preposição: submeteram o amor a provações."},
- {s:"port",t:"Vestibular · UFPR",q:"Em qual alternativa o vocábulo “a” deve receber acento grave?",o:["Pintou o quadro a óleo.", "Fomos a uma aldeia.", "Dirigiram-se a Vossa Excelência.", "Voltou a casa paterna.", "Começou a chover."],a:3,e:"“Casa” especificada (paterna) aceita artigo: voltou à casa paterna."},
- {s:"port",t:"Vestibular · ITA",q:"1 – Tudo correu as mil maravilhas. 2 – Caminhamos rente a parede. 3 – Ele jamais foi a festas. A crase é obrigatória:",o:["apenas na sentença 1", "apenas na sentença 2", "apenas nas sentenças 1 e 2", "em todas as sentenças"],a:2,e:"Às mil maravilhas (locução) e rente à parede. Em 3, “a festas” (plural genérico) é só preposição."},
- {s:"port",t:"Vestibular · UFTM",q:"Em qual par a crase muda o sentido? I. fui até a escola / fui até à escola. II. passei a noite na casa da prima / passei à noite na casa da prima. III. entreguei o relatório a minha supervisora / à minha supervisora.",o:["I, apenas", "II, apenas", "I e III, apenas", "II e III, apenas", "I, II e III"],a:1,e:"“Passei a noite” = a noite inteira; “passei à noite” = durante a noite (fui lá à noite). Em I e III a crase é opcional."},
- {s:"port",t:"Vestibular · Oficial de Justiça/SP",q:"Assinale a alternativa em que o sinal indicativo da crase foi usado inadequadamente:",o:["Prefiro esta bolsa àquela.", "Isto é prejudicial à saúde.", "Escrevia à Machado de Assis.", "Ele referiu-se à Fabiana, não a mim.", "As lágrimas caíam uma à uma de seus olhos."],a:4,e:"Palavras repetidas (uma a uma) não levam crase. “À Machado de Assis” = à moda de Machado (correto)."},
- {s:"port",t:"ENEM 2010",q:"Na canção dos Tribalistas, a palavra “corasamborim” junta coração, samba e tamborim. Essa palavra corresponde a um(a):",o:["estrangeirismo, uso de elementos linguísticos originados em outras línguas e representativos de outras culturas.", "neologismo, criação de novos itens linguísticos, pelos mecanismos que o sistema da língua disponibiliza.", "gíria, que compõe uma linguagem originada em determinado grupo social e que pode vir a se disseminar em uma comunidade mais ampla.", "regionalismo, por ser palavra característica de determinada área geográfica.", "termo técnico, dado que designa elemento de área específica de atividade."],a:1,e:"É uma palavra nova, criada juntando outras: neologismo (por aglutinação)."},
- {s:"port",t:"Vestibular · Ufrrj 2006",q:"O neologismo “ciberespaço” (ciber + espaço) foi formado por:",o:["Composição por justaposição", "Composição por aglutinação", "Derivação prefixal", "Derivação parassintética"],a:0,e:"Dois radicais se juntam sem perda de sons: justaposição (é o gabarito oficial)."},
- {s:"port",t:"Vestibular · Unicamp 2012",q:"Num texto, as palavras “invendável” e “imprestável” aparecem. Como foram formadas?",o:["Derivação prefixal e sufixal (in- de negação + -ável)", "Composição por aglutinação", "Derivação regressiva", "Derivação imprópria"],a:0,e:"in- (não) + vend/prest + -ável (que pode ser): segundo o gabarito, prefixo de negação e sufixo -ável."},
- {s:"port",t:"Livro",q:"Quem narra “O Sol é para Todos”?",o:["Scout, já adulta, lembrando a infância", "Atticus", "Jem", "Um narrador que não participa da história"],a:0,e:"Narradora-personagem em 1ª pessoa."},
- {s:"port",t:"Livro",q:"O que simboliza o rouxinol (mockingbird)?",o:["Os inocentes que só fazem o bem e são destruídos pela maldade, como Tom e Boo", "A cidade de Maycomb", "A coragem de Atticus", "A liberdade dos negros"],a:0,e:"“É pecado matar um rouxinol”: ele não faz mal a ninguém, só canta."},
- {s:"port",t:"Livro",q:"O que Atticus ensina com o exemplo de Mrs. Dubose?",o:["Coragem é seguir até o fim mesmo sabendo que vai perder", "Que não se deve ler para idosos", "Que camélias são perigosas", "Que é preciso andar armado"],a:0,e:"Ela largou a morfina antes de morrer."},
- {s:"port",t:"Livro",q:"Por que Heck Tate diz que Bob Ewell caiu sobre a própria faca?",o:["Para proteger Boo Radley, que salvou as crianças", "Porque foi Jem quem o matou", "Porque não houve ataque", "Para proteger Atticus"],a:0,e:"Expor Boo à cidade “seria como matar um rouxinol”."},
+const SEC=[['Função quadrática','#EEEDFE','#3C3489'],['Função afim','#E1F5EE','#085041'],['Frequência e gráficos','#FAECE7','#712B13'],['Média, mediana e moda','#FBEAF0','#72243E'],['Intervalo de classe','#FAEEDA','#633806'],['Trigonometria','#E6F1FB','#0C447C'],['Relações métricas','#EAF3DE','#27500A']];
+const T=s=>`style="fill:var(--text-primary)" font-size="13"`;
+function grid(f,marks){const U=18,O=120;let s='<svg viewBox="0 0 240 240" style="width:100%;max-width:220px;display:block;margin:6px 0">';for(let i=-6;i<=6;i++){s+=`<line x1="${O+i*U}" y1="12" x2="${O+i*U}" y2="228" style="stroke:var(--border)"/><line x1="12" y1="${O-i*U}" x2="228" y2="${O-i*U}" style="stroke:var(--border)"/>`;if(i)s+=`<text x="${O+i*U}" y="${O+12}" font-size="9" text-anchor="middle" style="fill:var(--text-secondary)">${i}</text><text x="${O-5}" y="${O-i*U+3}" font-size="9" text-anchor="end" style="fill:var(--text-secondary)">${i}</text>`}
+s+=`<line x1="12" y1="${O}" x2="228" y2="${O}" style="stroke:var(--text-secondary)"/><line x1="${O}" y1="12" x2="${O}" y2="228" style="stroke:var(--text-secondary)"/>`;let p=[];for(let x=-6.6;x<=6.6;x+=.05){const y=f(x);if(y>-6.6&&y<6.6)p.push((O+x*U).toFixed(1)+','+(O-y*U).toFixed(1))}s+=`<polyline points="${p.join(' ')}" fill="none" stroke="#378ADD" stroke-width="2.5"/>`;(marks||[]).forEach(m=>s+=`<circle cx="${O+m[0]*U}" cy="${O-m[1]*U}" r="4" fill="#378ADD"/>`);return s+'</svg>'}
+function bars(v,lab,cap){const W=210,mx=Math.max(...v),bw=W/v.length;let s=`<svg viewBox="0 0 ${W} 135" style="width:100%;max-width:210px;display:block">`;if(cap)s+=`<text x="105" y="11" font-size="10" text-anchor="middle" style="fill:var(--text-secondary)">${cap}</text>`;v.forEach((x,i)=>{const h=x/mx*85;s+=`<rect x="${i*bw+5}" y="${108-h}" width="${bw-10}" height="${h}" rx="2" fill="#888780"/><text x="${i*bw+bw/2}" y="${103-h}" font-size="10" text-anchor="middle" style="fill:var(--text-primary)">${x}</text><text x="${i*bw+bw/2}" y="122" font-size="9" text-anchor="middle" style="fill:var(--text-secondary)">${lab[i]}</text>`});return s+'</svg>'}
+function tri(L,ang){const t=Math.tan(ang*Math.PI/180);let bw=210,bh=bw*t;if(bh>140){bh=140;bw=bh/t}const x0=50,y0=170,x1=x0+bw,y1=y0-bh;let s=`<svg viewBox="0 0 320 200" style="width:100%;max-width:320px;display:block;margin:6px 0">`;
+if(L.img=='predio')s+=`<rect x="${x0-34}" y="${y1}" width="34" height="${bh}" fill="#B4B2A9"/>`;
+s+=`<polygon points="${x0},${y0} ${x1},${y0} ${x0},${y1}" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/><polyline points="${x0},${y0-12} ${x0+12},${y0-12} ${x0+12},${y0}" fill="none" stroke="#185FA5"/><text x="${x1-38}" y="${y0-7}" font-size="12" fill="#0C447C">${ang}°</text>`;
+if(L.adj)s+=`<text x="${(x0+x1)/2}" y="${y0+18}" text-anchor="middle" ${T()}>${L.adj}</text>`;if(L.op)s+=`<text x="${x0-(L.img?40:8)}" y="${(y0+y1)/2}" text-anchor="end" ${T()}>${L.op}</text>`;if(L.hyp)s+=`<text x="${(x0+x1)/2+10}" y="${(y0+y1)/2-6}" ${T()}>${L.hyp}</text>`;return s+'</svg>'}
+function met(n,m,L){const a=n+m,k=270/a,B=[25,165],C=[25+a*k,165],H=[25+n*k,165],A=[H[0],165-Math.sqrt(n*m)*k];let s=`<svg viewBox="0 0 320 205" style="width:100%;max-width:320px;display:block;margin:6px 0"><polygon points="${A} ${B} ${C}" fill="#EAF3DE" stroke="#3B6D11" stroke-width="2"/><line x1="${A[0]}" y1="${A[1]}" x2="${H[0]}" y2="165" stroke="#3B6D11" stroke-dasharray="5 4"/><polyline points="${H[0]},153 ${H[0]+10},153 ${H[0]+10},165" fill="none" stroke="#3B6D11"/>`;
+const t=(x,y,v,an)=>v?`<text x="${x}" y="${y}" text-anchor="${an||'middle'}" ${T()}>${v}</text>`:'';s+=t((A[0]+B[0])/2-6,(A[1]+B[1])/2,L.c,'end')+t((A[0]+C[0])/2+8,(A[1]+C[1])/2,L.b,'start')+t(H[0]+6,(A[1]+165)/2,L.h,'start')+t((B[0]+H[0])/2,182,L.n)+t((H[0]+C[0])/2,182,L.m)+t(160,200,L.a);return s+'</svg>'}
+function rio(){return `<svg viewBox="0 0 320 180" style="width:100%;max-width:320px;display:block;margin:6px 0"><rect x="10" y="30" width="300" height="120" fill="#E6F1FB"/><line x1="10" y1="30" x2="310" y2="30" stroke="#185FA5" stroke-width="2"/><line x1="10" y1="150" x2="310" y2="150" stroke="#185FA5" stroke-width="2"/><line x1="200" y1="150" x2="130.7" y2="30" stroke="#D85A30" stroke-width="2.5"/><line x1="130.7" y1="30" x2="130.7" y2="150" stroke="#0C447C" stroke-dasharray="4 4"/><path d="M225 150 A25 25 0 0 0 187.5 128.3" fill="none" stroke="#712B13"/><text x="222" y="130" font-size="12" fill="#712B13">120°</text><text x="203" y="168" ${T()}>A</text><text x="124" y="22" ${T()}>B</text><text x="90" y="95" ${T()}>51 m</text></svg>`}
+function torre(){return `<svg viewBox="0 0 320 190" style="width:100%;max-width:320px;display:block;margin:6px 0"><rect x="30" y="35" width="16" height="135" fill="#B4B2A9"/><line x1="46" y1="170" x2="300" y2="170" stroke="var(--text-secondary)"/><line x1="46" y1="35" x2="290" y2="170" stroke="#185FA5" stroke-dasharray="5 4"/><line x1="46" y1="35" x2="196" y2="170" stroke="#185FA5" stroke-dasharray="5 4"/><text x="250" y="163" font-size="12" fill="#0C447C">27°</text><text x="160" y="163" font-size="12" fill="#0C447C">42°</text><text x="243" y="186" ${T()}>20 m</text><text x="120" y="186" ${T()}>x</text><text x="14" y="105" ${T()}>t</text><text x="293" y="185" ${T()}>P</text></svg>`}
+function tbl(h,r){return '<table class="tb"><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+r.map(w=>'<tr>'+w.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</table>'}
+const F=(l,a,t)=>({l,a,t:t||0.01}),P=(l,a)=>F(l,a,0.15);
+const Q=[
+[0,{t:'graph',q:'Monte o gráfico de f(x) = x² + 2x − 3',sub:'Marque as 2 raízes e o vértice.',f:x=>x*x+2*x-3,must:[[1,0],[-3,0],[-1,-4]],e:'Δ = 4 + 12 = 16 → x = (−2 ± 4)/2 → raízes 1 e −3.<br>Vértice: xv = −b/2a = −1 → yv = −4 → V(−1, −4). Boca para cima (a > 0).'}],
+[0,{t:'graph',q:'Monte o gráfico de f(x) = −x² + 2x + 3',sub:'Marque as 2 raízes e o vértice.',f:x=>-x*x+2*x+3,must:[[-1,0],[3,0],[1,4]],e:'Δ = 4 + 12 = 16 → x = (−2 ± 4)/(−2) → raízes −1 e 3.<br>xv = −2/(−2) = 1 → yv = 4 → V(1, 4). Boca para baixo (a < 0).'}],
+[0,{t:'mc',q:'f(x) = x² + 4x − 21: raízes, corte no eixo y e concavidade?',o:['3 e −7 · y = −21 · para cima','−3 e 7 · y = −21 · para cima','3 e −7 · y = 4 · para baixo','−3 e 7 · y = 21 · para baixo'],a:0,e:'Δ = 16 + 84 = 100 → x = (−4 ± 10)/2 → 3 e −7.<br>Corta o eixo y no c = −21. a = 1 > 0 → para cima.'}],
+[0,{t:'mc',q:'Qual equação tem este gráfico?',fig:()=>grid(x=>x*x-1,[[-1,0],[1,0],[0,-1]]),o:['−x² + 1 = 0','x² − 1 = 0','x² + 1 = 0','x² + 2x + 1 = 0'],a:1,e:'Boca para cima → a > 0. Raízes ±1 e corta y em −1 → x² − 1 = 0.'}],
+[0,{t:'mc',q:'Sobre f(x) = ax² + bx + c deste gráfico:',fig:()=>grid(x=>-(x-2)*(x-2),[[2,0],[0,-4]]),o:['a > 0 · Δ = 0 · c > 0','a < 0 · Δ = 0 · c > 0','a < 0 · Δ > 0 · c < 0','a < 0 · Δ = 0 · c < 0'],a:3,e:'Boca para baixo → a < 0. Toca o eixo x em 1 ponto → Δ = 0. Corta y em −4 → c < 0.'}],
+[1,{t:'graph',q:'Monte o gráfico de f(x) = −x/2 + 2',sub:'Marque 3 pontos (use x par).',f:x=>-x/2+2,min:3,e:'x = −2 → 3 · x = 0 → 2 · x = 2 → 1 · x = 4 → 0. a < 0 → decrescente.'}],
+[1,{t:'graph',q:'Monte o gráfico de f(x) = 2x + 3',sub:'Marque 3 pontos.',f:x=>2*x+3,min:3,e:'x = −2 → −1 · x = −1 → 1 · x = 0 → 3 · x = 1 → 5. Primeiro multiplica, depois soma.'}],
+[1,{t:'mc',q:'Qual função afim é esta?',fig:()=>grid(x=>x-2,[[0,-2],[2,0]]),o:['f(x) = −x − 2','f(x) = x − 2','f(x) = 2x − 2','f(x) = x + 2'],a:1,e:'Corta y em −2 → b = −2. Raiz em 2 → a·2 − 2 = 0 → a = 1.'}],
+[1,{t:'mc',q:'Temperatura: f(x) = −5 + 3x. Quanto vale f(6)?',o:['−23','13','23','9'],a:1,e:'−5 + 3·6 = −5 + 18 = 13.'}],
+[1,{t:'num',q:'Raiz de f(x) = −2x − 4',fs:[F('x =',-2)],e:'−2x − 4 = 0 → −2x = 4 → x = −2.'}],
+[2,{t:'num',q:'Complete a frequência relativa (%)',sub:tbl(['Moradores','1','2','3','4','5','6','Total'],[['FA','4','6','8','12','6','4','40']]),fs:[P('1',10),P('2',15),P('3',20),P('4',30),P('5',15),P('6',10)],e:'FR = FA ÷ 40 × 100 → 10 · 15 · 20 · 30 · 15 · 10 (soma 100%).'}],
+[2,{t:'bars',q:'Construa o gráfico de barras da pizzaria',sub:tbl(['Nota','1★','2★','3★','4★','5★'],[['Qtd','4','2','4','10','30']]),cats:['1★','2★','3★','4★','5★'],ans:[4,2,4,10,30],e:'Cada barra sobe até a quantidade: 4, 2, 4, 10, 30.'}],
+[2,{t:'mc',q:'Doces: 15, 7, 10, 13, 17, 9 (tipos 1 a 6). Qual gráfico?',o:[bars([15,9,10,13,17,7],[1,2,3,4,5,6]),bars([15,7,13,10,17,9],[1,2,3,4,5,6]),bars([15,7,10,13,17,9],[1,2,3,4,5,6]),bars([17,7,10,13,15,9],[1,2,3,4,5,6])],a:2,e:'Só o c bate barra por barra. Nos outros, duas barras estão trocadas.'}],
+[2,{t:'num',q:'Setor com 30% no gráfico de pizza: quantos graus?',fs:[F('ângulo (°)',108)],e:'360° × 0,30 = 108°.'}],
+[2,{t:'num',q:'36 alunos, 9 tiraram nota 8. FR da nota 8?',fs:[F('FR (%)',25)],e:'9 ÷ 36 = 0,25 = 25%.'}],
+[3,{t:'num',q:'Notas: 9, 7, 6, 4, 9',fs:[F('média',7),F('mediana',7),F('moda',9)],e:'Média 35/5 = 7. Em ordem 4, 6, 7, 9, 9 → mediana 7. Moda 9.'}],
+[3,{t:'mc',q:'Média salarial da empresa',fig:()=>bars([8000,5000,4000,3000,2000,1000],['1','4','5','10','10','20'],'Salário (R$) × nº de funcionários'),o:['R$ 1.000','R$ 2.360','R$ 2.950','R$ 4.600'],a:1,e:'8000·1 + 5000·4 + 4000·5 + 3000·10 + 2000·10 + 1000·20 = 118.000.<br>÷ 50 funcionários = R$ 2.360.'}],
+[3,{t:'mc',q:'Quem teve o melhor tempo médio?',sub:tbl(['Equipe','Tempos (s)'],[['A','30 · 28 · 35 · 31 · 26'],['B','27 · 33 · 29 · 34 · 32']]),o:['A, média 30 s','B, média 31 s','A, média 31 s','B, média 30 s'],a:0,e:'A: 150/5 = 30 s. B: 155/5 = 31 s. Menor tempo = melhor → A.'}],
+[3,{t:'num',q:'Mediana de 12, 15, 9, 20, 18, 11',fs:[F('mediana',13.5)],e:'Ordem: 9, 11, 12, 15, 18, 20 → (12 + 15)/2 = 13,5.'}],
+[3,{t:'mc',q:'Pizzaria: média, mediana e moda',sub:tbl(['Nota','1★','2★','3★','4★','5★'],[['Qtd','4','2','4','10','30']]),o:['4,2 · 5 · 5','4 · 4 · 5','4,2 · 4 · 30','3 · 3 · 5'],a:0,e:'Média: (4 + 4 + 12 + 40 + 150)/50 = 4,2.<br>Mediana: 25º e 26º valores caem no 5★ → 5. Moda: 5 (a nota, não o 30).'}],
+[4,{t:'num',q:'Caixa eletrônico (30 dias) · 4 classes a partir de 60',sub:'<div style="font-family:var(--font-mono);font-size:13px;line-height:1.7">84 72 91 66 80 76 88 60 79 85 70 97 82 74 63 86 99 75 81 68 89 71 92 82 78 84 69 95 76 86</div>',fs:[F('amplitude total',39),F('amplitude classe',10),F('FA 60⊢70',5),F('FA 70⊢80',9),F('FA 80⊢90',11),F('FA 90⊢100',5)],e:'AT = 99 − 60 = 39 → 39 ÷ 4 = 9,75 → 10.<br>Contagem: 5 · 9 · 11 · 5 (total 30).'}],
+[4,{t:'num',q:'Mesmos dados: FR, classe modal e média',sub:tbl(['Classe','60⊢70','70⊢80','80⊢90','90⊢100'],[['FA','5','9','11','5']]),fs:[P('FR 60⊢70',16.7),P('FR 70⊢80',30),P('FR 80⊢90',36.7),P('FR 90⊢100',16.7),F('modal (início)',80),F('média',80.33,0.05)],e:'FR: 5/30 = 16,7 · 9/30 = 30 · 11/30 = 36,7 · 5/30 = 16,7.<br>Modal 80⊢90. Média: (65·5 + 75·9 + 85·11 + 95·5)/30 = 2410/30 ≈ 80,33.'}],
+[4,{t:'num',q:'Distribuição de classes',sub:tbl(['Classe','10⊢20','20⊢30','30⊢40','40⊢50','50⊢60'],[['FA','4','6','12','5','3']]),fs:[P('FR 10⊢20',13.3),P('FR 20⊢30',20),P('FR 30⊢40',40),P('FR 40⊢50',16.7),P('FR 50⊢60',10),F('nº de classes',5),F('média',34)],e:'FR = FA ÷ 30. Média: (15·4 + 25·6 + 35·12 + 45·5 + 55·3)/30 = 1020/30 = 34.'}],
+[4,{t:'mc',q:'Baterias: qual é a classe modal?',sub:tbl(['Meses','0⊢3','3⊢6','6⊢9','9⊢12'],[['FA','6','10','24','40']]),o:['0 ⊢ 3','3 ⊢ 6','6 ⊢ 9','9 ⊢ 12'],a:3,e:'Classe modal = maior FA → 9 ⊢ 12 (40).'}],
+[4,{t:'num',q:'Baterias: FR de 6⊢9 e a média',sub:tbl(['Meses','0⊢3','3⊢6','6⊢9','9⊢12'],[['FA','6','10','24','40']]),fs:[F('FR 6⊢9 (%)',30),F('média (meses)',8.175,0.03)],e:'Total 80 → 24/80 = 30%.<br>Pontos médios 1,5 · 4,5 · 7,5 · 10,5 → (9 + 45 + 180 + 420)/80 = 654/80 ≈ 8,18.'}],
+[5,{t:'num',q:'Comprimento x do fio',sub:'sen 37° = 0,6 · cos 37° = 0,8 · tg 37° = 0,75',fig:()=>tri({adj:'24 m',hyp:'x',img:'predio'},37),fs:[F('x (m)',30)],e:'24 = adjacente, x = hipotenusa → cos (CAH): 0,8 = 24/x → x = 30 m.'}],
+[5,{t:'mc',q:'Altura t da torre',sub:'tg 27° = 0,5 · tg 42° = 0,9',fig:torre,o:['18 m','22,5 m','25 m','27,5 m'],a:1,e:'t = 0,9x e t = 0,5(x + 20) → 0,9x = 0,5x + 10 → 0,4x = 10 → x = 25.<br>t = 0,9·25 = 22,5 m.'}],
+[5,{t:'num',q:'Altura da pipa',sub:'√2 = 1,41',fig:()=>tri({hyp:'60 m',op:'x'},45),fs:[F('x (m)',42.3,0.1)],e:'sen 45° = x/60 → x = 60·√2/2 = 30·1,41 = 42,3 m.'}],
+[5,{t:'num',q:'Barco atravessa rio de 50 m a 45° da margem',sub:'√2 = 1,41',fig:()=>tri({op:'50 m',hyp:'d'},45),fs:[F('d (m)',70.5,0.1)],e:'sen 45° = 50/d → d = 100/√2 = 50√2 = 70,5 m.'}],
+[5,{t:'mc',q:'Distância AB do barco',sub:'√3 = 1,7',fig:rio,o:['51 m','60 m','85 m','102 m'],a:1,e:'Ângulo interno: 180° − 120° = 60°. sen 60° = 51/AB → √3/2 = 51/AB → AB = 102/1,7 = 60 m.'}],
+[6,{t:'num',q:'Altura h relativa à hipotenusa',fig:()=>met(3.6,6.4,{c:'6',b:'8',h:'h',a:'10'}),fs:[F('h',4.8)],e:'a·h = b·c → 10h = 6·8 = 48 → h = 4,8.'}],
+[6,{t:'num',q:'Comprimento do caminho na praça',fig:()=>met(5.4,9.6,{c:'9 m',b:'12 m',h:'?'}),fs:[F('caminho (m)',7.2)],e:'a² = 81 + 144 = 225 → a = 15. a·h = b·c → 15h = 108 → h = 7,2 m.'}],
+[6,{t:'mc',q:'Trajetos B + C somados',fig:()=>met(9,16,{c:'C',b:'B',n:'9 m',m:'16 m'}),o:['25 m','30 m','35 m','40 m'],a:2,e:'a = 25. B² = 25·16 = 400 → 20. C² = 25·9 = 225 → 15. Soma 35 m.'}],
+[6,{t:'num',q:'Determine as medidas desconhecidas',fig:()=>met(9,16,{c:'c',b:'b',h:'h',n:'9',m:'16'}),fs:[F('h',12),F('b',20),F('c',15)],e:'h² = m·n = 144 → h = 12. b² = 25·16 → 20. c² = 25·9 → 15.'}],
+[6,{t:'num',q:'Encontre as projeções n e m',fig:()=>met(7.2,12.8,{c:'12',n:'n',m:'m',a:'20'}),fs:[F('n',7.2),F('m',12.8)],e:'c² = a·n → 144 = 20n → n = 7,2. m = 20 − 7,2 = 12,8.'}]
 ];
+let idx=0,pts=0,streak=0,best=0,res={},queue=Q.map((_,i)=>i),qi=0;
+const app=document.getElementById('app'),hud=document.getElementById('hud'),nav=document.getElementById('nav');
+function num(v){v=v.replace(',','.').replace(/[^0-9.\-]/g,'');return v===''?NaN:parseFloat(v)}
+function buildNav(){nav.innerHTML=SEC.map((s,i)=>`<button data-s="${i}" style="background:${s[1]};color:${s[2]};border-color:${s[1]}">${s[0]}</button>`).join('');nav.querySelectorAll('button').forEach(b=>b.onclick=()=>{queue=Q.map((_,i)=>i);qi=Q.findIndex(q=>q[0]==+b.dataset.s);render()})}
+function drawHud(gain){const s=SEC[Q[queue[qi]][0]];hud.innerHTML=`<div class="top"><span class="chip" style="background:${s[1]};color:${s[2]}">${s[0]}</span><span style="font-size:13px;color:var(--text-secondary)">Questão ${qi+1} de ${queue.length}</span><span style="flex:1"></span><span class="stat"><i class="ti ti-star" aria-hidden="true"></i>${pts}${gain?'<span class="pop">+'+gain+'</span>':''}</span><span class="stat"><i class="ti ti-flame" aria-hidden="true" style="color:#D85A30"></i>${streak}</span></div><div class="bar"><div style="width:${qi/queue.length*100}%"></div></div>`}
+function render(){const [si,q]=Q[queue[qi]];drawHud();
+app.innerHTML=`<div class="card"><p class="qt">${q.q}</p>${q.sub?'<div style="font-size:14px;color:var(--text-secondary)">'+q.sub+'</div>':''}${q.fig?q.fig():''}<div class="area"></div><div class="err" style="font-size:13px;color:var(--text-danger);margin-top:6px"></div><div style="display:flex;gap:8px;margin-top:12px"><button class="go" style="padding:10px 22px;font-size:15px">Confirmar <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div><div class="out"></div></div>`;
+const area=app.querySelector('.area'),err=app.querySelector('.err'),go=app.querySelector('.go'),out=app.querySelector('.out');let check,reveal=()=>{};
+if(q.t=='mc'){let sel=-1;area.innerHTML='<div class="og">'+q.o.map((o,i)=>`<button class="op" data-i="${i}"><b>${'abcd'[i]})</b> ${o}</button>`).join('')+'</div>';const bs=[...area.querySelectorAll('.op')];bs.forEach(b=>b.onclick=()=>{sel=+b.dataset.i;bs.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');err.textContent=''});
+check=()=>{if(sel<0){err.textContent='Escolha uma alternativa.';return null}bs[q.a].classList.add('right');if(sel!=q.a)bs[sel].classList.add('wrong');return sel==q.a}}
+if(q.t=='num'){area.innerHTML=q.fs.map((f,i)=>`<label class="fld">${f.l}<input inputmode="decimal" data-i="${i}"></label>`).join('');const ins=[...area.querySelectorAll('input')];ins.forEach(x=>x.oninput=()=>err.textContent='');ins[0].focus();
+check=()=>{if(ins.some(x=>x.value.trim()=='')){err.textContent='Preencha todos os campos.';return null}let ok=true;ins.forEach((x,i)=>{const f=q.fs[i],g=Math.abs(num(x.value)-f.a)<=f.t;x.style.borderColor=g?'#1D9E75':'#E24B4A';x.style.borderWidth='2px';if(!g){ok=false;x.insertAdjacentHTML('afterend','<span style="font-size:12px;color:var(--text-success)">certo: '+String(Math.round(f.a*100)/100).replace('.',',')+'</span>')}});return ok}}
+if(q.t=='graph'){const U=20,O=170;let s=`<svg viewBox="0 0 340 340" style="width:100%;max-width:360px;display:block;margin:8px 0;cursor:crosshair;touch-action:manipulation"><defs><clipPath id="cp"><rect x="10" y="10" width="320" height="320"/></clipPath></defs>`;for(let i=-8;i<=8;i++){s+=`<line x1="${O+i*U}" y1="10" x2="${O+i*U}" y2="330" style="stroke:var(--border)"/><line x1="10" y1="${O-i*U}" x2="330" y2="${O-i*U}" style="stroke:var(--border)"/>`;if(i)s+=`<text x="${O+i*U}" y="${O+13}" font-size="10" text-anchor="middle" style="fill:var(--text-secondary)">${i}</text><text x="${O-5}" y="${O-i*U+4}" font-size="10" text-anchor="end" style="fill:var(--text-secondary)">${i}</text>`}
+s+=`<line x1="10" y1="${O}" x2="330" y2="${O}" style="stroke:var(--text-secondary)" stroke-width="1.3"/><line x1="${O}" y1="10" x2="${O}" y2="330" style="stroke:var(--text-secondary)" stroke-width="1.3"/><g class="cv" clip-path="url(#cp)"></g><g class="pt"></g></svg><div style="font-size:13px;color:var(--text-secondary)">${q.sub} Clique de novo para apagar. <span class="pl"></span></div>`;area.innerHTML=s;
+const svg=area.querySelector('svg'),G=area.querySelector('.pt'),CV=area.querySelector('.cv'),PL=area.querySelector('.pl');let p=[],lock=false;
+const dr=bad=>{G.innerHTML=p.map(a=>{const w=bad&&bad.some(b=>b[0]==a[0]&&b[1]==a[1]);return `<circle cx="${O+a[0]*U}" cy="${O-a[1]*U}" r="6" fill="${w?'#E24B4A':'#534AB7'}"/>`}).join('');PL.textContent=p.map(a=>'('+a[0]+', '+a[1]+')').join(' ')};
+reveal=()=>{let l=[];for(let x=-8.5;x<=8.5;x+=.05)l.push((O+x*U).toFixed(1)+','+(O-q.f(x)*U).toFixed(1));CV.innerHTML=`<polyline points="${l.join(' ')}" fill="none" stroke="#1D9E75" stroke-width="3"/>`+(q.must||[]).map(m=>`<circle cx="${O+m[0]*U}" cy="${O-m[1]*U}" r="9" fill="none" stroke="#1D9E75" stroke-width="2"/>`).join('')};
+svg.addEventListener('click',e=>{if(lock)return;const r=svg.getBoundingClientRect(),x=Math.round(((e.clientX-r.left)*340/r.width-O)/U),y=Math.round((O-(e.clientY-r.top)*340/r.height)/U);if(Math.abs(x)>8||Math.abs(y)>8)return;const k=p.findIndex(a=>a[0]==x&&a[1]==y);k>=0?p.splice(k,1):p.push([x,y]);err.textContent='';dr()});
+check=()=>{const need=q.must?3:(q.min||2);if(p.length<need){err.textContent='Marque pelo menos '+need+' pontos.';return null}lock=true;const bad=p.filter(a=>Math.abs(q.f(a[0])-a[1])>1e-9);dr(bad);const miss=(q.must||[]).filter(m=>!p.some(a=>a[0]==m[0]&&a[1]==m[1]));q.why=bad.length?'Pontos em vermelho não pertencem à função.':miss.length?'Faltou marcar raiz ou vértice (círculos verdes).':'';return !bad.length&&!miss.length}}
+if(q.t=='bars'){const n=5,W=340,H=230,B=190,K=5,cw=(W-40)/n;let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:380px;display:block;margin:8px 0;cursor:pointer">`;for(let v=0;v<=32;v+=2){const y=B-v*K;s+=`<line x1="36" y1="${y}" x2="${W-4}" y2="${y}" style="stroke:var(--border)"/>`;if(v%4==0)s+=`<text x="30" y="${y+4}" font-size="10" text-anchor="end" style="fill:var(--text-secondary)">${v}</text>`}
+q.cats.forEach((c,i)=>s+=`<text x="${40+i*cw+cw/2}" y="${B+16}" font-size="12" text-anchor="middle" style="fill:var(--text-secondary)">${c}</text>`);s+=`<line x1="36" y1="${B}" x2="${W-4}" y2="${B}" style="stroke:var(--text-secondary)"/><g class="bb"></g><g class="ok"></g></svg><div style="font-size:13px;color:var(--text-secondary)">Clique na coluna na altura do valor.</div>`;area.innerHTML=s;
+const svg=area.querySelector('svg'),BB=area.querySelector('.bb'),OK=area.querySelector('.ok');let v=[0,0,0,0,0],lock=false;const dr=()=>BB.innerHTML=v.map((x,i)=>`<rect x="${40+i*cw+8}" y="${B-x*K}" width="${cw-16}" height="${x*K}" rx="3" fill="#D85A30"/><text x="${40+i*cw+cw/2}" y="${B-x*K-5}" font-size="12" text-anchor="middle" style="fill:var(--text-primary)">${x||''}</text>`).join('');
+svg.addEventListener('click',e=>{if(lock)return;const r=svg.getBoundingClientRect(),sx=(e.clientX-r.left)*W/r.width,sy=(e.clientY-r.top)*H/r.height,i=Math.floor((sx-40)/cw);if(i<0||i>4)return;v[i]=Math.max(0,Math.min(32,Math.round((B-sy)/K/2)*2));err.textContent='';dr()});
+reveal=()=>OK.innerHTML=q.ans.map((x,i)=>`<rect x="${40+i*cw+6}" y="${B-x*K}" width="${cw-12}" height="${x*K}" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-dasharray="5 3"/>`).join('');
+check=()=>{if(v.every(x=>!x)){err.textContent='Levante as barras primeiro.';return null}lock=true;return v.every((x,i)=>x==q.ans[i])}}
+go.onclick=()=>{q.why='';const r=check();if(r===null)return;go.remove();area.querySelectorAll('input,button').forEach(x=>x.disabled=true);
+let gain=0;if(r){streak++;best=Math.max(best,streak);gain=10+(streak>=3?5:0);pts+=gain}else streak=0;res[queue[qi]]=r;if(!r)reveal();drawHud(gain);
+const last=qi==queue.length-1;out.innerHTML=`<div class="res" style="background:${r?'var(--bg-success)':'var(--bg-danger)'}"><div style="font-weight:600;color:${r?'var(--text-success)':'var(--text-danger)'};font-size:15px"><i class="ti ti-${r?'circle-check':'circle-x'}" aria-hidden="true"></i> ${r?(streak>=3?'Mandou bem! Sequência de '+streak:'Acertou!'):'Não foi dessa vez. '+(q.why||'')}</div><div style="margin-top:6px;color:var(--text-primary)">${q.e}</div></div><button class="nx" style="margin-top:12px;padding:10px 22px;font-size:15px">${last?'Ver resultado':'Próxima'} <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`;
+out.querySelector('.nx').onclick=()=>{if(last)end();else{qi++;render();window.scrollTo({top:0,behavior:'smooth'})}}}}
+function end(){hud.innerHTML='';const fullRun=queue.length===Q.length;const hit=Object.values(res).filter(Boolean).length,tot=Object.keys(res).length;const wrong=Object.keys(res).filter(k=>!res[k]).map(Number);
+let rows=SEC.map((s,i)=>{const ks=Q.map((q,j)=>q[0]==i?j:-1).filter(j=>j>=0&&j in res);const h=ks.filter(j=>res[j]).length;return ks.length?`<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:14px"><span style="width:170px">${s[0]}</span><div style="flex:1;height:10px;background:var(--bg-neutral);border-radius:99px;overflow:hidden"><div style="height:100%;width:${h/ks.length*100}%;background:${s[2]}"></div></div><span style="width:40px;text-align:right">${h}/${ks.length}</span></div>`:''}).join('');
+app.innerHTML=`<div class="card" style="text-align:center"><i class="ti ti-trophy" style="font-size:40px;color:#BA7517" aria-hidden="true"></i><div style="font-size:28px;font-weight:800;margin:4px 0">${pts} pontos</div><div style="color:var(--text-secondary);font-size:14px">${hit} de ${tot} acertos · melhor sequência: ${best}</div><div style="text-align:left;margin:16px 0">${rows}</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">${wrong.length?'<button class="rw">Refazer as erradas ('+wrong.length+')</button>':''}<button class="ag">Jogar de novo</button></div></div>`;
+if(fullRun&&tot===Q.length)submitBox(hit);const rw=app.querySelector('.rw');if(rw)rw.onclick=()=>{queue=wrong;qi=0;streak=0;render()};app.querySelector('.ag').onclick=()=>{queue=Q.map((_,i)=>i);qi=0;pts=0;streak=0;best=0;res={};render()}}
 
-const $ = id => document.getElementById(id);
-let list = [], i = 0, right = 0, answers = [], mode = "mix", player = "", isRetry = false;
-
-function shuffle(a){ for(let k=a.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [a[k],a[j]]=[a[j],a[k]]; } return a; }
-function prep(q){ const idx = shuffle(q.o.map((_,n)=>n)); return {...q, o: idx.map(n=>q.o[n]), a: idx.indexOf(q.a)}; }
-
-function startWith(qs, retry = false){
-  isRetry = retry;
-  // keep reading questions together, in order, at the start of their block
-  const reading = qs.filter(q=>q.p), rest = shuffle(qs.filter(q=>!q.p));
-  list = [...reading, ...rest].map(prep);
-  i = 0; right = 0; answers = [];
-  show("quiz"); render();
-}
-function show(id){ ["start","quiz","result"].forEach(s=>$(s).classList.toggle("hidden", s!==id)); $("rankCard").classList.toggle("hidden", id==="quiz"); window.scrollTo(0,0); }
-
-function render(){
-  const q = list[i];
-  $("prog").textContent = `Questão ${i+1} de ${list.length}`;
-  $("score").textContent = `Acertos: ${right}`;
-  $("barFill").style.width = (i/list.length*100)+"%";
-  $("tag").textContent = SUBJ[q.s]+" · "+q.t;
-  $("tag").className = "tag"+(q.s==="eng"?"":" "+q.s);
-  $("passage").innerHTML = q.p ? `<div class="text"></div>` : "";
-  if(q.p) $("passage").firstChild.textContent = q.p;
-  $("question").textContent = q.q;
-  $("fb").innerHTML = ""; $("nextBtn").classList.add("hidden");
-  const box = $("opts"); box.innerHTML = "";
-  q.o.forEach((txt,n)=>{
-    const b = document.createElement("button"); b.className = "opt";
-    b.innerHTML = `<span class="l">${"ABCDE"[n]})</span><span></span>`; b.lastChild.textContent = txt;
-    b.onclick = ()=>choose(n); box.appendChild(b);
-  });
-}
-function choose(n){
-  const q = list[i], ok = n===q.a;
-  if(ok) right++;
-  answers.push({q, chosen:n, ok});
-  [...$("opts").children].forEach((b,k)=>{ b.disabled=true; if(k===q.a) b.classList.add("ok"); else if(k===n) b.classList.add("bad"); });
-  const fb = document.createElement("div"); fb.className = "fb "+(ok?"ok":"bad");
-  fb.innerHTML = `<b>${ok?"Acertou!":"Resposta certa: "+"ABCDE"[q.a]+")"}</b><p></p>`; fb.lastChild.textContent = q.e;
-  $("fb").appendChild(fb);
-  $("score").textContent = `Acertos: ${right}`;
-  $("nextBtn").textContent = i===list.length-1 ? "Ver resultado" : "Próxima";
-  $("nextBtn").classList.remove("hidden"); $("nextBtn").focus();
-}
-$("nextBtn").onclick = ()=>{ if(i<list.length-1){ i++; render(); } else finish(); };
-$("quitBtn").onclick = ()=> answers.length ? finish() : show("start");
-
-function finish(){
-  const total = answers.length, pct = total ? Math.round(right/total*100) : 0;
-  $("resName").textContent = player ? `Resultado de ${player}` : "Seu resultado";
-  $("resScore").textContent = `${right} / ${total}`;
-  $("resMsg").textContent = pct>=85 ? "Excelente! Você está pronto para a prova." : pct>=60 ? "Bom resultado! Revise as que errou e tente de novo." : "Vale revisar o resumo e refazer as que errou.";
-  const by = s => { const a = answers.filter(x=>x.q.s===s); return a.length ? `${a.filter(x=>x.ok).length}/${a.length}` : "—"; };
-  $("resStats").innerHTML = `<div class="stat"><small>Português</small><b>${by("port")}</b></div><div class="stat"><small>Aproveitamento</small><b>${pct}%</b></div><div class="stat"><small>Erros</small><b>${total-right}</b></div>`;
-  const wl = $("wrongList"); wl.innerHTML = "";
-  const wrong = answers.filter(x=>!x.ok);
-  $("retryWrong").classList.toggle("hidden", !wrong.length);
-  if(!wrong.length){ wl.innerHTML = `<p class="hint">Nenhum erro. Mandou bem!</p>`; }
-  wrong.forEach(x=>{
-    const d = document.createElement("div"); d.className = "wrong";
-    d.innerHTML = `<span class="tag ${x.q.s==="eng"?"":x.q.s}"></span><div class="q"></div><div class="hint"></div><div class="hint"></div><div class="hint" style="color:var(--ink)"></div>`;
-    d.children[0].textContent = x.q.t; d.children[1].textContent = x.q.q;
-    d.children[2].textContent = "Você marcou: " + x.q.o[x.chosen];
-    d.children[3].textContent = "Correta: " + x.q.o[x.q.a];
-    d.children[4].textContent = x.q.e; wl.appendChild(d);
-  });
-  $("copied").textContent = "";
-  show("result");
-  handleRanking();
-}
-$("retryWrong").onclick = ()=>{ const base = answers.filter(x=>!x.ok).map(x=>Q.find(o=>o.q===x.q.q)); startWith(base, true); };
-$("restart").onclick = ()=> show("start");
-document.querySelectorAll("button.pick").forEach(b=> b.onclick = ()=>{
-  player = $("name").value.trim();
-  if(!player){ $("nameErr").textContent = "Escreva seu nome para entrar no ranking."; $("name").focus(); return; }
-  mode = b.dataset.mode;
-  startWith(mode==="mix" ? Q.slice() : Q.filter(q=>q.s===mode));
-});
-$("name").oninput = ()=> $("nameErr").textContent = "";
-$("themeBtn").onclick = ()=>{
-  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  r.dataset.theme = dark ? "light" : "dark";
-};
-
-// ---------- RANKING (Google) ----------
-const TOT = { eng: Q.filter(q=>q.s==="eng").length, chem: Q.filter(q=>q.s==="chem").length, port: Q.filter(q=>q.s==="port").length };
-const SUBJ = { eng: "Inglês", chem: "Química", port: "Português" };
-let rows = [], rankKey = "port", loaded = false;
-const gs = (window.google && google.script && google.script.run) ? google.script.run : null;
-
-function runResult(){
-  if(isRetry) return null;
-  const r = { n: player };
-  for(const s of ["port"]){ const a = answers.filter(x=>x.q.s===s); if(a.length===TOT[s]) r[s] = a.filter(x=>x.ok).length; }
-  return (r.eng!==undefined || r.chem!==undefined || r.port!==undefined) ? r : null;
-}
-function scoreOf(row, k){
-  if(k==="total"){ if(row.eng==null && row.chem==null && row.port==null) return null; return (row.eng||0)+(row.chem||0)+(row.port||0); }
-  return row[k];
-}
-function outOf(row, k){ return k==="total" ? (row.eng!=null?TOT.eng:0)+(row.chem!=null?TOT.chem:0)+(row.port!=null?TOT.port:0) : TOT[k]; }
-function sortedRows(k){ return rows.filter(r=>scoreOf(r,k)!=null && scoreOf(r,k)!==undefined).sort((a,b)=> scoreOf(b,k)-scoreOf(a,k) || String(a.name).localeCompare(String(b.name))); }
-function renderRank(){
-  const list = $("rankList"); list.innerHTML = "";
-  const rs = sortedRows(rankKey);
-  if(!rs.length){ list.innerHTML = loaded ? `<p class="hint">Ninguém entrou no ranking ainda. Seja o primeiro!</p>` : `<p class="hint">Carregando ranking…</p>`; return; }
-  rs.forEach((r,n)=>{
-    const d = document.createElement("div"); d.className = "rrow";
-    d.innerHTML = `<div class="pos ${n<3?"g"+(n+1):""}">${n+1}</div><div class="rname"></div><div class="rsc"></div>`;
-    const feitas = ["eng","chem","port"].filter(s=>r[s]!=null); d.children[1].textContent = r.name + (rankKey==="total" && feitas.length<3 ? " ("+feitas.map(s=>SUBJ[s]).join(" + ")+")" : "");
-    d.children[2].innerHTML = `${scoreOf(r,rankKey)}<small>/${outOf(r,rankKey)}</small>`;
-    list.appendChild(d);
-  });
-}
-function setRows(data){ if(Array.isArray(data)){ rows = data; loaded = true; renderRank(); } }
-function loadRank(){ if(!gs) { $("rankList").innerHTML = `<p class="hint">Ranking indisponível nesta visualização.</p>`; return; }
-  google.script.run.withSuccessHandler(setRows).withFailureHandler(()=>{ if(!loaded) $("rankList").innerHTML = `<p class="hint">Não foi possível carregar o ranking agora.</p>`; }).getRanking(); }
-document.querySelectorAll(".tabs button").forEach(b=> b.onclick = ()=>{
-  rankKey = b.dataset.k; document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on", x===b)); renderRank();
-});
-$("copyRank").onclick = async ()=>{
-  const lines = [`Ranking do Simulado (${rankKey==="total"?"Geral":SUBJ[rankKey]}):`];
-  sortedRows(rankKey).forEach((r,n)=> lines.push(`${n+1}º ${r.name}: ${scoreOf(r,rankKey)}/${outOf(r,rankKey)}`));
-  const txt = lines.join("\n");
-  try { await navigator.clipboard.writeText(txt); $("rankCopied").textContent = "Ranking copiado! Cole no grupo."; }
-  catch(e){ $("rankCopied").textContent = txt; }
-};
-function handleRanking(){
-  const box = $("rankBox"); box.innerHTML = "";
-  const r = runResult();
-  if(!r){ box.textContent = isRetry ? "Refazer as erradas é só treino: não entra no ranking." : "Para entrar no ranking, faça o simulado até o fim, sem sair no meio."; return; }
-  if(!gs){ box.textContent = "Ranking indisponível nesta visualização."; return; }
-  box.textContent = "Salvando no ranking…";
-  google.script.run
-    .withSuccessHandler(data=>{ setRows(data); box.textContent = "Seu resultado entrou no ranking!"; })
-    .withFailureHandler(()=>{ box.textContent = "Não consegui salvar agora. Tente terminar de novo em alguns minutos."; })
-    .submitScore(r.n, r.eng===undefined?null:r.eng, r.chem===undefined?null:r.chem, r.port===undefined?null:r.port);
-}
-loadRank();
-setInterval(()=>{ if(!document.hidden) loadRank(); }, 20000);
+const API="https://script.google.com/macros/s/AKfycbyck0co983cJQApEy4_ZZ7mdfEFPWO9ysO5V-FxGeoc_Ec6o61E7UFalYnjFPYKMfzGKQ/exec";
+function api(p){return fetch(API+"?"+new URLSearchParams(p),{redirect:"follow"}).then(r=>r.json()).then(j=>{if(!j.ok)throw new Error(j.error);return j.data})}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function showRank(d){const el=document.getElementById("rk");d=d.filter(r=>!isNaN(r.pts)).sort((a,b)=>b.pts-a.pts||b.hits-a.hits);if(!d.length){el.innerHTML='<div style="color:var(--text-secondary);font-size:14px">Ninguém ainda. Seja o primeiro!</div>';return}
+el.innerHTML=d.map((r,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid var(--border);font-size:15px"><span style="width:26px;font-weight:800;color:${i<3?['#BA7517','#888780','#993C1D'][i]:'var(--text-secondary)'}">${i+1}º</span><span style="flex:1">${esc(r.name)}</span><span style="font-weight:800">${r.pts} pts</span><span style="width:70px;text-align:right;color:var(--text-secondary);font-size:13px">${r.hits}/35</span></div>`).join('')}
+function loadRank(){document.getElementById("rk").textContent="Carregando…";api({action:"rank"}).then(showRank).catch(()=>document.getElementById("rk").textContent="Não foi possível carregar o ranking agora.")}
+document.getElementById("rkBtn").onclick=loadRank;loadRank();
+function submitBox(hit){const box=document.createElement('div');let nm='';try{nm=localStorage.getItem('nome')||''}catch(e){}
+box.innerHTML=`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);text-align:left"><div style="font-weight:700;margin-bottom:6px">Coloque seu nome no ranking</div><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="nm" maxlength="24" placeholder="Seu nome" value="${esc(nm)}" style="flex:1;min-width:160px"><button id="snd">Enviar</button></div><div id="sm" style="font-size:13px;margin-top:6px"></div></div>`;
+app.querySelector('.card').appendChild(box);const sm=box.querySelector('#sm'),bt=box.querySelector('#snd');
+bt.onclick=()=>{const n=box.querySelector('#nm').value.trim();if(!n){sm.style.color='var(--text-danger)';sm.textContent='Digite seu nome.';return}try{localStorage.setItem('nome',n)}catch(e){}bt.disabled=true;sm.style.color='var(--text-secondary)';sm.textContent='Enviando…';
+api({action:"submit",name:n,pts:pts,hits:hit}).then(d=>{showRank(d);sm.style.color='var(--text-success)';sm.textContent='Enviado! Veja sua posição no ranking abaixo.'}).catch(()=>{bt.disabled=false;sm.style.color='var(--text-danger)';sm.textContent='Não deu para enviar agora. Tente de novo.'})}}
+buildNav();render();
+document.getElementById('themeBtn').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}};
+try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
 </script>
+</div>
 </body>
 </html>
