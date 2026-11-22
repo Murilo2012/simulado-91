@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulado de Português</title>
+<title>Simulados · Turma 91</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -80,7 +80,7 @@ textarea{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);bo
 <body>
 <div class="wrap">
   <div class="top"><span>9º ano · Prova Trimestral</span><button class="theme" id="themeBtn">Tema</button></div>
-  <h1>Simulado de Português</h1>
+  <h1>Simulados · Turma 91</h1>
   <p class="sub">Responda, veja a explicação na hora e confira sua nota no final.</p>
 
   <section id="start" class="card">
@@ -88,6 +88,7 @@ textarea{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);bo
     <input type="text" id="name" maxlength="24" placeholder="Ex.: Murilo">
     <div class="err" id="nameErr"></div>
     <div class="grid">
+      <a class="pick" href="matematica.html" style="text-decoration:none;display:block"><b>Matemática</b><span>Funções, estatística, intervalo de classe, trigonometria e relações métricas · modo jogo</span></a>
       <button class="pick" data-mode="port"><b>Português</b><span>Roteiro, crase, regência, colocação, formação de palavras e o livro</span></button>
     </div>
     <p class="hint">As questões seguem o roteiro de estudos da prof.ª Juliana. As alternativas são embaralhadas a cada tentativa.</p>
@@ -308,7 +309,7 @@ function finish(){
 }
 $("retryWrong").onclick = ()=>{ const base = answers.filter(x=>!x.ok).map(x=>Q.find(o=>o.q===x.q.q)); startWith(base, true); };
 $("restart").onclick = ()=> show("start");
-document.querySelectorAll(".pick").forEach(b=> b.onclick = ()=>{
+document.querySelectorAll("button.pick").forEach(b=> b.onclick = ()=>{
   player = $("name").value.trim();
   if(!player){ $("nameErr").textContent = "Escreva seu nome para entrar no ranking."; $("name").focus(); return; }
   mode = b.dataset.mode;
